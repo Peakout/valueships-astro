@@ -1,3 +1,6 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +9,8 @@
 <title>State of European SaaS Pricing 2026 - Find your archetype</title>
 <meta name="description" content="A 90-second diagnostic based on the survey of ~100 European SaaS C-suite leaders. Find your pricing archetype and see how much revenue you're leaving on the table.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="/colors_and_type.css">
+<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+<link rel="stylesheet" href={`${base}/colors_and_type.css`}>
 <style is:global>
   /* ============== layout shell ============== */
   html { scroll-behavior: smooth; }
