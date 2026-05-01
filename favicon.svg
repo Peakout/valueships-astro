@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="g" x1="16" y1="1" x2="-4" y2="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#CC004B" stop-opacity="0"/>
+      <stop offset="1" stop-color="#CC004B"/>
+    </linearGradient>
+    <clipPath id="c">
+      <polygon points="16,1 0,26 16,21 32,26"/>
+    </clipPath>
+  </defs>
+  <polygon points="16,1 0,26 16,21 32,26" fill="#FF005E" clip-path="url(#c)"/>
+  <polygon points="16,1.5 0,27 16,22" fill="url(#g)" clip-path="url(#c)"/>
+</svg>

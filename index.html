@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State of European SaaS Pricing 2026 - Find your archetype</title>
+<meta name="description" content="A 90-second diagnostic based on the survey of ~100 European SaaS C-suite leaders. Find your pricing archetype and see how much revenue you're leaving on the table.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="./colors_and_type.css">
+<style>
+  /* ============== layout shell ============== */
+  html { scroll-behavior: smooth; }
+  body { background: var(--surface-dim); }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 32px 24px 96px;
+  }
+  .breadcrumb {
+    font-size: 12px;
+    color: var(--fg2);
+    margin-bottom: 32px;
+    letter-spacing: 0.3px;
+  }
+  .breadcrumb a { color: var(--fg2); }
+  .breadcrumb a:hover { color: var(--primary); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--fg3); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--fg2);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .pill__dot {
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+
+  /* ============== hero ============== */
+  .hero {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    padding: 64px 64px 56px;
+    box-shadow: var(--elevation-1);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  /* Paper-airplane / sharp magenta triangle - brand signature motif */
+  .hero__plane {
+    position: absolute;
+    top: -40px;
+    right: -60px;
+    width: 280px;
+    height: 280px;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .hero__plane svg { width: 100%; height: 100%; display: block; }
+  .hero__inner { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, var(--fs-headline-large));
+    line-height: 1.05;
+    letter-spacing: var(--ls-headline-large);
+    font-weight: var(--fw-medium);
+    margin: 16px 0 18px;
+    max-width: 18ch;
+    color: var(--fg1);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--primary);
+    font-weight: var(--fw-medium);
+  }
+  .hero__lede {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-large);
+    line-height: 1.55;
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    max-width: 60ch;
+    margin-bottom: 32px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--outline-variant);
+    border-bottom: 1px solid var(--outline-variant);
+    margin: 32px 0;
+  }
+  .stat {
+    padding: 24px 16px;
+    border-right: 1px solid var(--outline-variant);
+  }
+  .stat:last-child { border-right: none; }
+  .stat__num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-headline-medium);
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat__num.neutral { color: var(--fg1); }
+  .stat__lbl {
+    font-size: var(--fs-label-small);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--fg2);
+    font-weight: var(--fw-medium);
+  }
+
+  /* ============== buttons ============== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-body-medium);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-family: var(--font-sans);
+    transition: background var(--motion-short) var(--motion-standard),
+                color var(--motion-short) var(--motion-standard);
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .btn-primary {
+    background: #ff005e;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #cc004b; color: #fff; }
+  .btn-primary:active { background: #a8003d; color: #fff; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+  .btn-secondary:hover { background: var(--surface-pink-softest); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--fg1);
+    border-color: var(--outline-variant);
+  }
+  .btn-ghost:hover { background: var(--surface-container); }
+  .btn-large { padding: 16px 28px; font-size: 15px; }
+  .btn-outline {
+    background: transparent;
+    color: #ff005e;
+    border: 2px solid #ff005e;
+  }
+  .btn-outline:hover { background: #ff005e; color: #fff; }
+  .btn-outline:active { background: #cc004b; color: #fff; }
+
+  .hero__ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  /* ============== download gate ============== */
+  .download-gate {
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    padding: 48px 64px;
+    box-shadow: var(--elevation-1);
+    margin-bottom: 24px;
+  }
+  .download-gate__inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .download-gate__copy { flex: 1; }
+  .download-gate__copy h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-large);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-title-large);
+    color: var(--fg1);
+    margin-bottom: 8px;
+  }
+  .download-gate__copy p {
+    font-size: var(--fs-body-medium);
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    margin: 0;
+  }
+  .download-gate__form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+    width: 280px;
+  }
+  .download-gate__field { display: flex; flex-direction: column; gap: 4px; }
+  .download-gate__form input[type=email] {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--outline-variant);
+    background: var(--surface);
+    color: var(--fg1);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-medium);
+    font-weight: var(--fw-light);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .download-gate__form input[type=email]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(255, 0, 94, 0.2);
+  }
+  .download-gate__form input[type=email]::placeholder { color: var(--fg3); }
+  .download-gate__error {
+    font-size: 12px;
+    color: #c0002a;
+    min-height: 16px;
+    margin: 0;
+  }
+  .download-gate__form .btn { width: 100%; justify-content: center; }
+
+  /* ============== section card ============== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    padding: 48px 64px;
+    box-shadow: var(--elevation-1);
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-large);
+    line-height: 1.2;
+    letter-spacing: var(--ls-title-large);
+    font-weight: var(--fw-medium);
+    margin-bottom: 12px;
+    color: var(--fg1);
+  }
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-medium);
+    letter-spacing: var(--ls-title-medium);
+    font-weight: var(--fw-medium);
+    margin: 24px 0 8px;
+    color: var(--fg1);
+  }
+  .card p { color: var(--fg1); margin-bottom: 12px; font-weight: var(--fw-light); }
+
+  /* ============== quiz ============== */
+  .quiz {
+    display: none;
+  }
+  .quiz.active { display: block; }
+
+  .quiz__progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .quiz__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--surface-variant);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .quiz__progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 300ms var(--motion-standard);
+  }
+  .quiz__progress-label {
+    font-size: 12px;
+    color: var(--fg2);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .question__dim {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: var(--fs-label-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-kicker);
+    color: var(--primary);
+    font-weight: var(--fw-bold);
+    padding: 4px 10px;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
+  }
+  .question__text {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: var(--ls-headline-small);
+    font-weight: var(--fw-medium);
+    margin-bottom: 32px;
+    color: var(--fg1);
+  }
+
+  .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .answer {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color var(--motion-short) var(--motion-standard),
+                background var(--motion-short) var(--motion-standard);
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-medium);
+    font-weight: var(--fw-light);
+    color: var(--fg1);
+    width: 100%;
+  }
+  @media (hover: hover) {
+    .answer:hover {
+      border-color: var(--primary);
+      background: var(--surface-pink-softest);
+    }
+    .answer:hover .answer__num {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+  }
+  .answer.selected {
+    border-color: var(--primary);
+    background: var(--surface-pink-softest);
+  }
+  .answer__num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-container);
+    color: var(--fg2);
+    font-size: 12px;
+    font-weight: var(--fw-bold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .answer.selected .answer__num {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+  .answer__text { flex: 1; line-height: 1.45; }
+
+  .quiz__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--outline-variant);
+  }
+  .quiz__hint { font-size: 12px; color: var(--fg3); }
+
+  /* ARR input */
+  .arr-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .arr-input__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .arr-input input[type=range] {
+    flex: 1;
+    accent-color: var(--primary);
+  }
+  .arr-input__display {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-headline-medium);
+    color: var(--primary);
+    min-width: 140px;
+    line-height: 1;
+  }
+  .arr-input__hint {
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+  }
+
+  /* ============== result ============== */
+  .result { display: none; }
+  .result.active { display: block; }
+
+  .result__hero {
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    padding: 56px 64px 48px;
+    box-shadow: var(--elevation-2);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .result__hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--primary);
+  }
+  .result__code {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--surface-container);
+    border: 1px solid var(--outline-variant);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.12em;
+    color: var(--fg1);
+    margin-bottom: 12px;
+  }
+  .result__class {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: var(--fs-label-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-kicker);
+    color: var(--primary);
+    font-weight: var(--fw-bold);
+    margin-left: 10px;
+  }
+  .result__name {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 48px);
+    line-height: 1.05;
+    letter-spacing: var(--ls-headline-medium);
+    font-weight: var(--fw-medium);
+    margin-bottom: 14px;
+    color: var(--fg1);
+  }
+  .result__name em {
+    color: var(--primary);
+    font-style: normal;
+    font-weight: var(--fw-medium);
+  }
+  .result__profile {
+    font-size: var(--fs-body-large);
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    line-height: 1.55;
+    max-width: 65ch;
+    margin-bottom: 32px;
+  }
+
+  .leakage {
+    background: var(--surface-pink-softest);
+    border: 1px solid var(--outline-variant);
+    border-left: 3px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .leakage__lbl {
+    font-family: var(--font-sans);
+    font-size: var(--fs-label-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-kicker);
+    color: var(--primary);
+    font-weight: var(--fw-bold);
+    margin-bottom: 10px;
+  }
+  .leakage__num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-headline-medium);
+    color: var(--fg1);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .leakage__sub {
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+  }
+
+  .dim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .dim {
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elevation-1);
+  }
+  .dim__lbl {
+    font-family: var(--font-sans);
+    font-size: var(--fs-label-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-kicker);
+    color: var(--fg2);
+    font-weight: var(--fw-bold);
+    margin-bottom: 10px;
+  }
+  .dim__score {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-label-medium);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .dim__score.l { background: var(--error-container); color: var(--on-error-container); }
+  .dim__score.m { background: var(--surface-pink-softest); color: var(--primary); border: 1px solid var(--primary); }
+  .dim__score.h { background: var(--tertiary); color: var(--on-tertiary); }
+  .dim__desc { font-size: var(--fs-body-small); color: var(--fg2); line-height: 1.55; font-weight: var(--fw-light); }
+
+  .moves {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .moves li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary);
+  }
+  .moves__num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: 12px;
+    font-weight: var(--fw-bold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .moves__text { font-size: var(--fs-body-medium); line-height: 1.55; font-weight: var(--fw-light); }
+
+  .quote {
+    border-left: 3px solid var(--primary);
+    padding: 16px 0 16px 24px;
+    margin: 32px 0;
+    color: var(--fg1);
+    font-family: var(--font-display);
+    font-size: var(--fs-body-large);
+    font-weight: var(--fw-light);
+    font-style: italic;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+  }
+  .quote__author {
+    font-family: var(--font-sans);
+    font-style: normal;
+    margin-top: 14px;
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+    letter-spacing: 0;
+  }
+  .quote__author strong { color: var(--fg1); font-weight: var(--fw-medium); }
+
+  /* ============== gate ============== */
+  /* Aubergine register - mirrors the report-cover dark theme */
+  .gate {
+    position: relative;
+    background: var(--inverse-surface);
+    color: var(--inverse-on-surface);
+    border-radius: var(--radius-xl);
+    padding: 48px 56px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .gate__plane {
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 220px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .gate__plane svg { width: 100%; height: 100%; display: block; }
+  .gate__inner { position: relative; z-index: 1; max-width: 60ch; }
+  .gate h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: var(--ls-headline-small);
+    font-weight: var(--fw-medium);
+    margin-bottom: 10px;
+    color: var(--inverse-on-surface);
+  }
+  .gate p { color: var(--inverse-on-surface); opacity: 0.78; margin-bottom: 24px; font-weight: var(--fw-light); }
+  .gate__form {
+    display: flex;
+    gap: 8px;
+  }
+  .gate__form input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid #3a2540;
+    background: #25102d;
+    color: var(--inverse-on-surface);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-medium);
+    font-weight: var(--fw-light);
+  }
+  .gate__form input::placeholder { color: #8a7a92; }
+  .gate__form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(255, 0, 94, 0.25);
+  }
+
+  /* ============== archetype gallery ============== */
+  .archetypes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .arch-card {
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    cursor: pointer;
+    transition: border-color var(--motion-short) var(--motion-standard),
+                transform var(--motion-short) var(--motion-standard),
+                box-shadow var(--motion-short) var(--motion-standard);
+    box-shadow: var(--elevation-1);
+  }
+  .arch-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--elevation-2);
+  }
+  .arch-card.you {
+    border-color: var(--primary);
+    background: var(--surface-pink-softest);
+  }
+  .arch-card__code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg2);
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .arch-card__name {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-medium);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-title-medium);
+    margin-bottom: 6px;
+    color: var(--fg1);
+  }
+  .arch-card__leak {
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+  }
+  .arch-card__leak strong { color: var(--primary); font-weight: var(--fw-bold); }
+
+  /* ============== announcement bar / header / footer ============== */
+  .announce {
+    background: var(--primary);
+    color: var(--on-primary);
+    text-align: center;
+    padding: 10px 24px;
+    font-size: var(--fs-body-small);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.2px;
+  }
+  .announce a {
+    color: var(--on-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--outline-variant);
+    padding: 16px 24px;
+  }
+  .topbar__inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar__brand {
+    display: flex;
+    align-items: center;
+  }
+  .topbar__right {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+    letter-spacing: 0.2px;
+  }
+
+  .meta-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--outline-variant);
+    font-size: var(--fs-body-small);
+    color: var(--fg3);
+    text-align: center;
+    line-height: 1.6;
+    font-weight: var(--fw-light);
+  }
+  .meta-footer strong { color: var(--fg2); font-weight: var(--fw-medium); }
+
+  /* responsive */
+  @media (max-width: 720px) {
+    .wrap { padding: 24px 16px 64px; }
+    .hero { padding: 32px 24px; }
+    .hero__plane { width: 180px; height: 180px; right: -50px; top: -30px; opacity: 0.5; }
+    .card { padding: 32px 24px; }
+    .result__hero { padding: 36px 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--outline-variant); }
+    .dim-grid { grid-template-columns: 1fr; }
+    .gate { padding: 36px 24px; }
+    .gate__form { flex-direction: column; }
+    .gate__plane { display: none; }
+    .question__text { font-size: 22px; }
+    .result__name { font-size: 30px; }
+    .leakage__num { font-size: 32px; }
+    .topbar__right { display: none; }
+    .announce { font-size: 12px; padding: 8px 16px; }
+    .hero__ctas { flex-direction: column; }
+    .hero__ctas .btn { width: 100%; justify-content: center; }
+    .download-gate { padding: 32px 24px; }
+    .download-gate__inner { flex-direction: column; gap: 24px; }
+    .download-gate__form { width: 100%; }
+  }
+
+  @media (max-width: 991px) {
+    .quiz__hint { display: none; }
+    .quiz__nav { justify-content: space-between; }
+  }
+
+  /* ============== report preview / sneak peek ============== */
+  .preview-section {
+    margin-top: 48px;
+    margin-bottom: 24px;
+  }
+  .preview-section__header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+  .preview-section__header h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-large);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-title-large);
+    color: var(--fg1);
+    margin: 8px 0 10px;
+  }
+  .preview-section__header p {
+    font-size: var(--fs-body-medium);
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    max-width: 56ch;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .preview-card {
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    padding: 32px 36px;
+    box-shadow: var(--elevation-1);
+  }
+  .preview-card--wide {
+    grid-column: 1 / -1;
+  }
+  .preview-card__kicker {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-kicker);
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .preview-card h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-title-medium);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-title-medium);
+    color: var(--fg1);
+    margin-bottom: 6px;
+  }
+  .preview-card__sub {
+    font-size: var(--fs-body-small);
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* Distribution bars */
+  .distrib-rows { display: flex; flex-direction: column; gap: 14px; }
+  .distrib-row { display: flex; flex-direction: column; gap: 5px; }
+  .distrib-row__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .distrib-row__name {
+    font-size: var(--fs-label-medium);
+    font-weight: var(--fw-medium);
+    color: var(--fg1);
+  }
+  .distrib-row__name em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    margin-left: 6px;
+  }
+  .distrib-row__pct {
+    font-family: var(--font-display);
+    font-size: var(--fs-label-medium);
+    font-weight: var(--fw-bold);
+    color: var(--fg2);
+  }
+  .distrib-row--highlight .distrib-row__pct { color: var(--primary); }
+  .distrib-track {
+    height: 8px;
+    background: var(--surface-variant);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .distrib-fill {
+    height: 100%;
+    background: var(--surface-container);
+    border-radius: 4px;
+    transition: width 600ms cubic-bezier(.4,0,.2,1);
+  }
+  .distrib-row--highlight .distrib-fill { background: var(--primary); }
+  .distrib-note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--fg3);
+    border-top: 1px solid var(--outline-variant);
+    padding-top: 14px;
+  }
+
+  /* Leakage calculator */
+  .arr-picker {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .arr-pill {
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--outline-variant);
+    background: var(--surface);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-small);
+    font-weight: var(--fw-medium);
+    color: var(--fg2);
+    cursor: pointer;
+    transition: border-color var(--motion-short) var(--motion-standard),
+                background var(--motion-short) var(--motion-standard),
+                color var(--motion-short) var(--motion-standard);
+  }
+  .arr-pill.active {
+    border-color: var(--primary);
+    background: var(--surface-pink-softest);
+    color: var(--primary);
+  }
+  .leakage-rows { display: flex; flex-direction: column; gap: 12px; }
+  .leakage-row { display: flex; flex-direction: column; gap: 4px; }
+  .leakage-row__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .leakage-row__label {
+    font-size: var(--fs-label-medium);
+    font-weight: var(--fw-medium);
+    color: var(--fg1);
+  }
+  .leakage-row__label em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    margin-left: 4px;
+  }
+  .leakage-row__amount {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: var(--fw-bold);
+    color: var(--fg1);
+    white-space: nowrap;
+  }
+  .leakage-row--highlight .leakage-row__amount { color: var(--primary); }
+  .leakage-track {
+    height: 6px;
+    background: var(--surface-variant);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .leakage-fill {
+    height: 100%;
+    background: var(--surface-container);
+    border-radius: 3px;
+    transition: width 500ms cubic-bezier(.4,0,.2,1);
+  }
+  .leakage-row--highlight .leakage-fill { background: var(--primary); }
+  .leakage-note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--fg3);
+    border-top: 1px solid var(--outline-variant);
+    padding-top: 14px;
+  }
+
+  /* Gap comparison */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .gap-item {
+    background: var(--surface-container);
+    border-radius: var(--radius-lg);
+    padding: 20px 16px;
+    text-align: center;
+    border: 1px solid var(--outline-variant);
+  }
+  .gap-item--alert {
+    background: var(--error-container);
+    border-color: transparent;
+  }
+  .gap-item--good {
+    background: var(--tertiary);
+    border-color: transparent;
+  }
+  .gap-item__score {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .gap-item--alert .gap-item__score { color: var(--on-error-container); }
+  .gap-item--good .gap-item__score { color: var(--on-tertiary); }
+  .gap-item__score span { font-size: 16px; font-weight: var(--fw-medium); }
+  .gap-item__label {
+    font-size: 11px;
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+  }
+  .gap-item--alert .gap-item__label { color: var(--on-error-container); opacity: 0.8; }
+  .gap-item--good .gap-item__label { color: var(--on-tertiary); opacity: 0.85; }
+  .gap-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    color: var(--fg3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .gap-finding {
+    background: var(--surface-pink-softest);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 14px 18px;
+    font-size: var(--fs-body-small);
+    color: var(--fg1);
+    font-weight: var(--fw-light);
+    line-height: 1.6;
+    margin-top: 20px;
+  }
+  .gap-finding strong { color: var(--fg1); font-weight: var(--fw-medium); }
+
+  /* preview CTA */
+  .preview-cta {
+    text-align: center;
+    padding: 32px 24px;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--elevation-1);
+  }
+  .preview-cta p {
+    font-size: var(--fs-body-medium);
+    color: var(--fg2);
+    font-weight: var(--fw-light);
+    margin-bottom: 20px;
+  }
+  .preview-cta p strong { color: var(--fg1); font-weight: var(--fw-medium); }
+
+  @media (max-width: 720px) {
+    .preview-grid { grid-template-columns: 1fr; }
+    .preview-card { padding: 24px 20px; }
+    .gap-grid { grid-template-columns: 1fr; gap: 8px; }
+    .gap-vs { display: none; }
+    .arr-picker { gap: 6px; }
+    .arr-pill { padding: 5px 11px; font-size: 12px; }
+  }
+
+  /* fade transitions */
+  .stage { animation: fadeIn 300ms var(--motion-standard); }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  New report from Valueships - <a href="https://valueships.com" target="_blank" rel="noopener">read the full State of European SaaS Pricing 2026</a>
+</div>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="https://valueships.com" target="_blank" rel="noopener" class="topbar__brand"><svg width="139" height="25" viewBox="0 0 139 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Valueships"><mask id="mask0_1202_6821" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="19"><path d="M7.15619 0.23999L0.0712891 18.84L7.15619 14.968L14.2491 18.84L7.15619 0.23999Z" fill="white"/></mask><g mask="url(#mask0_1202_6821)"><path d="M7.15619 0.23999L0.0712891 18.84L7.15619 14.968L14.2491 18.84L7.15619 0.23999Z" fill="#FF005E"/><path d="M7.15619 0.503998L0.0712891 19.104L7.15619 15.232V0.503998Z" fill="url(#paint0_linear_1202_6821)"/></g><path fill-rule="evenodd" clip-rule="evenodd" d="M31.6623 0.242188L24.4522 18.8422H21.447L14.249 0.240002L17.4845 0.242188L22.9496 14.9672L28.4268 0.242188H31.6623ZM37.4788 19.0965C36.3559 19.0965 35.3118 18.8038 34.3464 18.2186C33.381 17.6333 32.6115 16.83 32.0379 15.8088C31.4644 14.7876 31.1776 13.6553 31.1776 12.4121C31.1776 11.1769 31.4644 10.0488 32.0379 9.02754C32.6115 8.00631 33.381 7.20104 34.3464 6.61172C35.3118 6.02239 36.3559 5.72773 37.4788 5.72773C38.4402 5.72773 39.3025 5.91139 40.066 6.27871C40.8294 6.64603 41.4696 7.1526 41.9866 7.79844L41.9987 6.01836H44.9434V18.8422H41.9866V17.05C41.4696 17.6958 40.8314 18.1984 40.072 18.5576C39.3126 18.9169 38.4482 19.0965 37.4788 19.0965ZM38.1938 16.5051C38.937 16.5051 39.6176 16.3295 40.2356 15.9783C40.8536 15.6271 41.3403 15.1387 41.6958 14.5131C42.0513 13.8874 42.229 13.1871 42.229 12.4121C42.229 11.6371 42.0513 10.9388 41.6958 10.3172C41.3403 9.69557 40.8536 9.20716 40.2356 8.85195C39.6176 8.49674 38.937 8.31914 38.1938 8.31914C37.4425 8.31914 36.7578 8.49674 36.1398 8.85195C35.5218 9.20716 35.033 9.69557 34.6735 10.3172C34.3141 10.9388 34.1343 11.6371 34.1343 12.4121C34.1343 13.1871 34.3141 13.8874 34.6735 14.5131C35.033 15.1387 35.5218 15.6271 36.1398 15.9783C36.7578 16.3295 37.4425 16.5051 38.1938 16.5051ZM48.1546 0.242188H51.0992V18.8422H48.1546V0.242188ZM59.6301 19.0844C58.4749 19.0844 57.4732 18.8906 56.6249 18.5031C55.7767 18.1156 55.1243 17.5566 54.6679 16.826C54.2114 16.0954 53.9832 15.2296 53.9832 14.2285V6.01836H56.9036V14.0711C56.9036 14.8703 57.1541 15.4738 57.6549 15.8814C58.1558 16.2891 58.8142 16.493 59.6301 16.493C60.4541 16.493 61.1146 16.2891 61.6114 15.8814C62.1082 15.4738 62.3566 14.8703 62.3566 14.0711V6.01836H65.277V14.2285C65.277 15.2296 65.0488 16.0954 64.5924 16.826C64.1359 17.5566 63.4836 18.1156 62.6353 18.5031C61.7871 18.8906 60.7854 19.0844 59.6301 19.0844ZM80.4364 12.8602H69.9424C69.9828 13.6109 70.1847 14.2729 70.5482 14.8461C70.9118 15.4193 71.3884 15.8653 71.9781 16.1842C72.5679 16.5031 73.2142 16.6625 73.917 16.6625C74.636 16.6625 75.3025 16.497 75.9164 16.166C76.5304 15.835 77.0232 15.3628 77.3948 14.7492L79.7578 15.7543C79.2165 16.7957 78.4349 17.6111 77.413 18.2004C76.391 18.7897 75.2298 19.0844 73.9291 19.0844C72.6204 19.0844 71.445 18.7897 70.4028 18.2004C69.3607 17.6111 68.5468 16.8078 67.9611 15.7906C67.3754 14.7734 67.0826 13.6513 67.0826 12.4242C67.0826 11.2052 67.3774 10.0871 67.9672 9.06992C68.5569 8.05273 69.3668 7.24746 70.3968 6.6541C71.4268 6.06074 72.576 5.76406 73.8443 5.76406C75.0641 5.76406 76.1729 6.04056 77.1706 6.59355C78.1683 7.14655 78.962 7.91751 79.5518 8.90645C80.1415 9.89538 80.4485 11.0195 80.4727 12.2789L80.4364 12.8602ZM73.8685 8.04062C72.9395 8.04062 72.1377 8.30097 71.4631 8.82168C70.7886 9.34239 70.3342 10.0467 70.0999 10.9348H77.4554C77.3504 10.3454 77.1302 9.83282 76.795 9.39688C76.4597 8.96094 76.0416 8.62591 75.5408 8.3918C75.0399 8.15768 74.4825 8.04062 73.8685 8.04062ZM86.4225 19.0844C85.437 19.0844 84.4938 18.929 83.593 18.6182C82.6923 18.3074 81.9026 17.9057 81.224 17.4133L82.5691 15.2215C83.0942 15.6574 83.7082 16.0187 84.411 16.3053C85.1138 16.5919 85.7843 16.7352 86.4225 16.7352C87.0284 16.7352 87.5111 16.606 87.8706 16.3477C88.2301 16.0893 88.4099 15.726 88.4099 15.2578C88.4099 14.9107 88.2947 14.6281 88.0645 14.4102C87.8343 14.1922 87.5556 14.0186 87.2284 13.8895C86.9012 13.7603 86.3983 13.5908 85.7197 13.3809C84.9038 13.1225 84.2373 12.8682 83.7203 12.618C83.2032 12.3677 82.761 12.0004 82.3934 11.516C82.0258 11.0316 81.842 10.3979 81.842 9.61484C81.842 8.78333 82.0541 8.07897 82.4782 7.50176C82.9023 6.92454 83.4719 6.49264 84.1868 6.20605C84.9018 5.91946 85.6955 5.77617 86.568 5.77617C87.3435 5.77617 88.1109 5.89121 88.8703 6.12129C89.6297 6.35137 90.3285 6.6763 90.9667 7.09609L89.5853 9.11836C89.1167 8.77929 88.5997 8.51693 88.0342 8.33125C87.4687 8.14557 86.9436 8.05273 86.4589 8.05273C85.9096 8.05273 85.4693 8.16374 85.1381 8.38574C84.8068 8.60775 84.6412 8.92057 84.6412 9.32422C84.6412 9.61485 84.7462 9.85703 84.9563 10.0508C85.1663 10.2445 85.4289 10.406 85.7439 10.5352C86.059 10.6643 86.5033 10.8137 87.0769 10.9832L87.5737 11.1285C88.325 11.3626 88.9592 11.6149 89.4762 11.8854C89.9932 12.1558 90.4254 12.5453 90.7728 13.0539C91.1202 13.5625 91.2939 14.2164 91.2939 15.0156C91.2939 15.8875 91.0879 16.6282 90.6759 17.2377C90.2639 17.8472 89.6903 18.3074 88.9552 18.6182C88.22 18.929 87.3758 19.0844 86.4225 19.0844ZM100.237 5.77617C101.166 5.77617 101.98 5.97194 102.679 6.36348C103.377 6.75502 103.921 7.33626 104.308 8.10723C104.696 8.87819 104.89 9.81666 104.89 10.9227V18.8422H102.006V11.3949C102.006 10.3051 101.76 9.51797 101.267 9.03359C100.774 8.54922 100.116 8.30703 99.2916 8.30703C98.4111 8.30703 97.7042 8.58151 97.171 9.13047C96.6378 9.67943 96.3672 10.4786 96.3591 11.5281V18.8422H93.463V0.242188H96.3591V7.87109C96.7873 7.20104 97.3306 6.68438 97.989 6.32109C98.6474 5.95781 99.3966 5.77617 100.237 5.77617ZM107.823 6.01836H110.767V18.8422H107.823V6.01836ZM109.313 3.56016C108.99 3.56016 108.691 3.47943 108.416 3.31797C108.142 3.15651 107.922 2.94056 107.756 2.67012C107.59 2.39967 107.507 2.103 107.507 1.78008C107.507 1.44909 107.588 1.14837 107.75 0.87793C107.911 0.607486 108.132 0.393555 108.41 0.236133C108.689 0.0787102 108.99 0 109.313 0C109.628 0 109.923 0.0787102 110.198 0.236133C110.472 0.393555 110.69 0.607486 110.852 0.87793C111.014 1.14837 111.094 1.44909 111.094 1.78008C111.094 2.103 111.014 2.39967 110.852 2.67012C110.69 2.94056 110.472 3.15651 110.198 3.31797C109.923 3.47943 109.628 3.56016 109.313 3.56016ZM113.991 6.01836H116.935V7.82266C117.436 7.19297 118.07 6.69447 118.838 6.32715C119.605 5.95983 120.469 5.77617 121.431 5.77617C122.562 5.77617 123.612 6.06679 124.581 6.64805C125.551 7.2293 126.32 8.02851 126.89 9.0457C127.459 10.0629 127.744 11.1931 127.744 12.4363C127.744 13.6796 127.459 14.8077 126.89 15.8209C126.32 16.8341 125.553 17.6312 124.588 18.2125C123.622 18.7938 122.57 19.0844 121.431 19.0844C120.494 19.0844 119.639 18.9068 118.868 18.5516C118.096 18.1964 117.452 17.6958 116.935 17.05V24.8727H113.991V6.01836ZM120.752 16.5414C121.495 16.5414 122.176 16.3638 122.794 16.0086C123.412 15.6534 123.901 15.163 124.26 14.5373C124.62 13.9117 124.8 13.2113 124.8 12.4363C124.8 11.6613 124.62 10.963 124.26 10.3414C123.901 9.71979 123.412 9.2334 122.794 8.88223C122.176 8.53105 121.495 8.35547 120.752 8.35547C120.001 8.35547 119.318 8.53105 118.704 8.88223C118.09 9.2334 117.604 9.71979 117.244 10.3414C116.885 10.963 116.705 11.6613 116.705 12.4363C116.705 13.2113 116.885 13.9117 117.244 14.5373C117.604 15.163 118.09 15.6534 118.704 16.0086C119.318 16.3638 120.001 16.5414 120.752 16.5414ZM133.839 19.0844C132.854 19.0844 131.911 18.929 131.01 18.6182C130.109 18.3074 129.319 17.9057 128.641 17.4133L129.986 15.2215C130.511 15.6574 131.125 16.0187 131.828 16.3053C132.531 16.5919 133.201 16.7352 133.839 16.7352C134.445 16.7352 134.928 16.606 135.287 16.3477C135.647 16.0893 135.827 15.726 135.827 15.2578C135.827 14.9107 135.712 14.6281 135.481 14.4102C135.251 14.1922 134.972 14.0186 134.645 13.8895C134.318 13.7603 133.815 13.5908 133.137 13.3809C132.321 13.1225 131.654 12.8682 131.137 12.618C130.62 12.3677 130.178 12.0004 129.81 11.516C129.443 11.0316 129.259 10.3979 129.259 9.61484C129.259 8.78333 129.471 8.07897 129.895 7.50176C130.319 6.92454 130.889 6.49264 131.604 6.20605C132.319 5.91946 133.112 5.77617 133.985 5.77617C134.76 5.77617 135.528 5.89121 136.287 6.12129C137.047 6.35137 137.745 6.6763 138.384 7.09609L137.002 9.11836C136.534 8.77929 136.017 8.51693 135.451 8.33125C134.886 8.14557 134.36 8.05273 133.876 8.05273C133.326 8.05273 132.886 8.16374 132.555 8.38574C132.224 8.60775 132.058 8.92057 132.058 9.32422C132.058 9.61485 132.163 9.85703 132.373 10.0508C132.583 10.2445 132.846 10.406 133.161 10.5352C133.476 10.6643 133.92 10.8137 134.494 10.9832L134.991 11.1285C135.742 11.3626 136.376 11.6149 136.893 11.8854C137.41 12.1558 137.842 12.5453 138.19 13.0539C138.537 13.5625 138.711 14.2164 138.711 15.0156C138.711 15.8875 138.505 16.6282 138.093 17.2377C137.681 17.8472 137.107 18.3074 136.372 18.6182C135.637 18.929 134.793 19.0844 133.839 19.0844Z" fill="#080808"/><defs><linearGradient id="paint0_linear_1202_6821" x1="7.15619" y1="0.503998" x2="-5.21819" y2="5.2175" gradientUnits="userSpaceOnUse"><stop stop-color="#CC004B" stop-opacity="0"/><stop offset="1" stop-color="#CC004B"/></linearGradient></defs></svg></a>
+    <span class="topbar__right">State of European SaaS Pricing 2026</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="breadcrumb">
+    <a href="https://www.valueships.com/">valueships.com</a><span class="sep">/</span><a href="https://valueships-state-of-pricing.netlify.app">state of pricing 2026</a>
+  </div>
+
+  <!-- ============== HERO STAGE ============== -->
+  <section id="stage-hero" class="stage">
+    <div class="hero">
+      <!-- Paper-airplane / sharp magenta triangle - brand signature -->
+      <div class="hero__plane" aria-hidden="true">
+        <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ff005e" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#ff669e" stop-opacity="0.7"/>
+            </linearGradient>
+          </defs>
+          <polygon points="20,260 260,20 200,140 110,150" fill="url(#planeGrad)"/>
+          <polygon points="110,150 200,140 130,220" fill="#ff005e" opacity="0.6"/>
+          <line x1="20" y1="260" x2="200" y2="140" stroke="#ff005e" stroke-width="1.5" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="hero__inner">
+        <span class="kicker">Diagnostic · under 60 seconds</span>
+        <h1>Find out where your <em>pricing</em> actually stands.</h1>
+        <p class="hero__lede">A diagnostic based on the survey of ~100 European SaaS C-suite leaders. Six questions, the same ones that explain the most variance in the report. See your archetype, your MRR leakage range, and the three priority moves your peers are making.</p>
+
+        <div class="hero__ctas">
+          <a class="btn btn-primary btn-large" href="#download-report">
+            Download the report
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v13M5 13l7 7 7-7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button class="btn btn-outline btn-large" id="start-quiz">
+            Start the diagnostic
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat__num">~100</div>
+            <div class="stat__lbl">CXO respondents</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num neutral">3</div>
+            <div class="stat__lbl">Pricing dimensions</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num neutral">5</div>
+            <div class="stat__lbl">Market archetypes</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">39.5%</div>
+            <div class="stat__lbl">Stuck at "medium"</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 8px;">Most European SaaS companies are functional pricers. Few are good ones.</h3>
+        <p style="color: var(--fg2); line-height: 1.6;">Pricing decisions get made, but rarely optimized. Revenue gets captured, but routinely left on the table. Nearly four in ten companies score medium across all three dimensions simultaneously - not because they've found balance, but because they're uniformly underdeveloped.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What this diagnostic tells you</h2>
+      <p>Three independent dimensions, each scored Low / Medium / High:</p>
+      <div class="dim-grid">
+        <div class="dim">
+          <div class="dim__lbl">01 · Toolkit</div>
+          <div class="dim__desc">Processes, tools, governance, and whether anyone is actually accountable for pricing outcomes.</div>
+        </div>
+        <div class="dim">
+          <div class="dim__lbl">02 · Setting</div>
+          <div class="dim__desc">How prices are determined - against value, or just covering costs and watching competitors.</div>
+        </div>
+        <div class="dim">
+          <div class="dim__lbl">03 · Execution</div>
+          <div class="dim__desc">Whether pricing decisions hold in practice - sales adherence, discount discipline, margin retention.</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--fg2);">The combination of your three scores produces a pricing archetype - a shorthand for how pricing actually functions inside your organization.</p>
+    </div>
+    <section class="preview-section" id="report-preview">
+      <div class="preview-section__header">
+        <span class="kicker">Data · ~100 C-suite respondents</span>
+        <h2>A glimpse of what's inside</h2>
+        <p>Three findings from the full 30-page report. The complete picture - all five archetypes, every gap, and the priority moves per profile - is in the PDF.</p>
+      </div>
+
+      <div class="preview-grid">
+
+        <!-- Chart 1: Market distribution -->
+        <div class="preview-card">
+          <div class="preview-card__kicker">Finding 01</div>
+          <h3>Where European SaaS actually stands</h3>
+          <p class="preview-card__sub">Self-assessment survey across three pricing dimensions. Most companies cluster in the middle - functional, but far from optimized.</p>
+          <div class="distrib-rows">
+            <div class="distrib-row">
+              <div class="distrib-row__meta">
+                <span class="distrib-row__name">LLL <em>The Improvisers</em></span>
+                <span class="distrib-row__pct">3.9%</span>
+              </div>
+              <div class="distrib-track"><div class="distrib-fill" style="width:3.9%"></div></div>
+            </div>
+            <div class="distrib-row">
+              <div class="distrib-row__meta">
+                <span class="distrib-row__name">MLL <em>Tool Collectors</em></span>
+                <span class="distrib-row__pct">14.5%</span>
+              </div>
+              <div class="distrib-track"><div class="distrib-fill" style="width:14.5%"></div></div>
+            </div>
+            <div class="distrib-row distrib-row--highlight">
+              <div class="distrib-row__meta">
+                <span class="distrib-row__name">MMM <em>Competent Operators · most common</em></span>
+                <span class="distrib-row__pct">39.5%</span>
+              </div>
+              <div class="distrib-track"><div class="distrib-fill" style="width:39.5%"></div></div>
+            </div>
+            <div class="distrib-row">
+              <div class="distrib-row__meta">
+                <span class="distrib-row__name">MHH <em>Revenue Optimizers</em></span>
+                <span class="distrib-row__pct">14.5%</span>
+              </div>
+              <div class="distrib-track"><div class="distrib-fill" style="width:14.5%"></div></div>
+            </div>
+            <div class="distrib-row">
+              <div class="distrib-row__meta">
+                <span class="distrib-row__name">HHH <em>Pricing Masters</em></span>
+                <span class="distrib-row__pct">~27.6%</span>
+              </div>
+              <div class="distrib-track"><div class="distrib-fill" style="width:27.6%"></div></div>
+            </div>
+          </div>
+          <p class="distrib-note">Full archetype profiles and priority moves per class are in the report.</p>
+        </div>
+
+        <!-- Chart 2: Leakage calculator -->
+        <div class="preview-card">
+          <div class="preview-card__kicker">Finding 02</div>
+          <h3>Annual revenue left on the table</h3>
+          <p class="preview-card__sub">Estimated MRR leakage by pricing maturity class. Select your ARR to see the numbers for your scale.</p>
+          <div class="arr-picker" id="arr-picker">
+            <button class="arr-pill" data-arr="1">€1M</button>
+            <button class="arr-pill active" data-arr="5">€5M</button>
+            <button class="arr-pill" data-arr="10">€10M</button>
+            <button class="arr-pill" data-arr="25">€25M</button>
+            <button class="arr-pill" data-arr="50">€50M</button>
+          </div>
+          <div class="leakage-rows" id="leakage-rows">
+            <!-- rendered by JS -->
+          </div>
+          <p class="leakage-note">Source: Valueships research. Leakage % ranges from the report; amounts calculated at selected ARR.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="download-gate" id="download-report">
+      <div class="download-gate__inner">
+        <div class="download-gate__copy">
+          <h2>State of European SaaS Pricing 2026</h2>
+          <p>30-page research report. ~100 C-suite respondents. Free.</p>
+        </div>
+        <form class="download-gate__form" id="download-form" novalidate>
+          <div class="download-gate__field">
+            <input type="email" id="download-email" placeholder="you@company.com" autocomplete="email" />
+            <p class="download-gate__error" id="download-error" aria-live="polite"></p>
+          </div>
+          <button class="btn btn-primary" type="submit">Send me the report →</button>
+        </form>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============== QUIZ STAGE ============== -->
+  <section id="stage-quiz" class="stage quiz">
+    <div class="card">
+      <div class="quiz__progress">
+        <div class="quiz__progress-bar"><div class="quiz__progress-fill" id="progress-fill"></div></div>
+        <div class="quiz__progress-label" id="progress-label">Question 1 of 10</div>
+      </div>
+
+      <div id="question-host"></div>
+
+      <div class="quiz__nav">
+        <button class="btn btn-ghost" id="back-btn">← Back</button>
+        <span class="quiz__hint">Tap <strong>1-5</strong> on your keyboard, or click an answer</span>
+        <button class="btn btn-primary" id="next-btn" disabled>Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== RESULT STAGE ============== -->
+  <section id="stage-result" class="stage result">
+    <div class="result__hero">
+      <span class="result__code" id="r-code">- - -</span>
+      <span class="result__class" id="r-class">Class -</span>
+      <h1 class="result__name">You are <em><span id="r-name">-</span></em></h1>
+      <p class="result__profile" id="r-profile">-</p>
+
+      <div class="leakage">
+        <div class="leakage__lbl">Estimated annual leakage at your ARR</div>
+        <div class="leakage__num" id="r-leakage">-</div>
+        <div class="leakage__sub" id="r-leakage-sub">-</div>
+      </div>
+
+      <div class="dim-grid">
+        <div class="dim">
+          <div class="dim__lbl">Toolkit</div>
+          <div class="dim__score" id="r-tk-score">-</div>
+          <div class="dim__desc" id="r-tk-desc">-</div>
+        </div>
+        <div class="dim">
+          <div class="dim__lbl">Setting</div>
+          <div class="dim__score" id="r-st-score">-</div>
+          <div class="dim__desc" id="r-st-desc">-</div>
+        </div>
+        <div class="dim">
+          <div class="dim__lbl">Execution</div>
+          <div class="dim__score" id="r-ex-score">-</div>
+          <div class="dim__desc" id="r-ex-desc">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your priority moves</h2>
+      <p style="color: var(--fg2); margin-bottom: 16px;">Three moves your peers in the same bucket are making. From the full set of recommendations in the report.</p>
+      <ol class="moves" id="r-moves"></ol>
+    </div>
+
+    <div class="card">
+      <h2>What others in your archetype say</h2>
+      <blockquote class="quote" id="r-quote">
+        <span id="r-quote-text">-</span>
+        <div class="quote__author" id="r-quote-author">-</div>
+      </blockquote>
+    </div>
+
+    <div class="gate">
+      <div class="gate__plane" aria-hidden="true">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,200 200,20 150,110 90,115" fill="#ff337e" opacity="0.7"/>
+          <polygon points="90,115 150,110 105,170" fill="#ff005e" opacity="0.55"/>
+          <line x1="20" y1="200" x2="150" y2="110" stroke="#ff669e" stroke-width="1.5" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="gate__inner">
+        <h2>Get the full 30-page report</h2>
+        <p>Includes all five archetypes, the five gaps that explain the most, and the full set of priority moves per archetype.</p>
+        <form class="gate__form" id="email-form">
+          <input type="email" placeholder="you@company.com" required id="email-input">
+          <button class="btn btn-primary btn-large" type="submit">Send me the PDF</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center;">
+      <h2>Or talk to Krzysztof</h2>
+      <p style="color: var(--fg2); max-width: 50ch; margin: 0 auto 20px;">30 minutes. No pitch. Senior Partner at Valueships, ex-McKinsey, 200+ pricing engagements. He'll tell you which of the moves above will actually move the number for your business.</p>
+      <a href="https://www.valueships.com/pricing-consultation" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book free consultation →</a>
+    </div>
+
+    <div class="card">
+      <h2>Compare archetypes</h2>
+      <p style="color: var(--fg2);">All five profiles ranked from floor to ceiling. Click any to read more.</p>
+      <div class="archetypes" id="arch-gallery"></div>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <button class="btn btn-ghost" id="restart-btn">Take the diagnostic again</button>
+    </div>
+  </section>
+
+  <div class="meta-footer">
+    Methodology: self-assessment survey of approximately 100 C-suite executives and founders from European software and technology companies, all directly involved in pricing decisions.<br>
+    Maturity scored across three dimensions (Toolkit, Setting, Execution). Self-reported data tends to reflect a favorable view - actual distribution is likely shifted lower.<br><br>
+    © Valueships 2026 · Built in collaboration with SaaSiest
+  </div>
+
+</div>
+
+<script>
+/* =========================================================
+   QUESTIONS - 9 Likert + 1 ARR
+   ========================================================= */
+const QUESTIONS = [
+  // ============= TOOLKIT (2) =============
+  {
+    dim: 'toolkit', short: 'Toolkit · Ownership',
+    text: 'Who owns pricing decisions in your organization?',
+    options: [
+      'Nobody. It shifts deal-by-deal.',
+      'Someone is nominally responsible, but has no real authority.',
+      'A single owner, part-time, alongside other duties.',
+      'A dedicated owner with cross-functional input.',
+      'A pricing council with clear governance and cadence.'
+    ]
+  },
+  {
+    dim: 'toolkit', short: 'Toolkit · Cadence',
+    text: 'How often does pricing come up in internal commercial discussions?',
+    options: [
+      'Almost never. Only when something forces it.',
+      'Occasionally, ad-hoc.',
+      'Monthly check-ins.',
+      'Weekly leadership reviews.',
+      'It is a continuous live topic across functions.'
+    ]
+  },
+  // ============= SETTING (2) =============
+  {
+    dim: 'setting', short: 'Setting · WTP',
+    text: 'How rigorously do you assess what customers are willing to pay?',
+    options: [
+      'Gut feel only.',
+      'Sales feedback. No formal research.',
+      'Customer interviews, qualitative.',
+      'Structured WTP research (e.g., Van Westendorp) on key launches.',
+      'Continuous WTP measurement built into the product feedback loop.'
+    ]
+  },
+  {
+    dim: 'setting', short: 'Setting · Price increases',
+    text: 'When you raise prices, what is the rationale?',
+    options: [
+      'Inflation or cost pressure.',
+      'Competitive moves.',
+      'A mix of cost and value framing.',
+      'Anchored in measurable customer value delivered.',
+      'Tied directly to outcome metrics customers track themselves.'
+    ]
+  },
+  // ============= EXECUTION (2) =============
+  {
+    dim: 'execution', short: 'Execution · Discounting',
+    text: 'How disciplined is your discounting?',
+    options: [
+      'Reps discount freely to close deals.',
+      'Approval thresholds exist, but get bypassed.',
+      'Approval flows in place, with occasional exceptions.',
+      'Discounts tied to objective deal criteria (size, term, expansion).',
+      'Automated guardrails block out-of-policy deals before they reach customers.'
+    ]
+  },
+  {
+    dim: 'execution', short: 'Execution · Realization',
+    text: 'How close is your average closed deal to your list / target price?',
+    options: [
+      'Below 70% of list.',
+      '70-80% of list.',
+      '80-87% of list.',
+      '87-93% of list.',
+      '93%+ of list.'
+    ]
+  },
+  // ============= ARR =============
+  {
+    dim: 'arr', short: 'About you',
+    text: "What's your annual recurring revenue (ARR)?",
+    type: 'arr'
+  }
+];
+
+/* =========================================================
+   ARCHETYPES
+   ========================================================= */
+const ARCHETYPES = {
+  LLL: {
+    code: 'LLL',
+    name: 'The Improvisers',
+    cls: 'Class 1',
+    leakLo: 0.17, leakHi: 0.25,
+    profile: 'Pricing is reactive, deal-driven, and inconsistent. There is no real owner, no real process, and no real enforcement. Every deal is effectively a fresh negotiation, and the outcome depends more on the rep\'s judgment than on any commercial logic the company has built.',
+    moves: [
+      'Assign a single pricing owner, even part-time, so someone is accountable for pricing decisions and outcomes.',
+      'Audit your last 6 months of pricing decisions to identify patterns, inconsistencies, and quick wins.',
+      'Stop cost-plus thinking. Start asking what value you create, rather than what it costs.'
+    ],
+    quote: {
+      text: 'For early stage companies (pre PMF, less than €1M ARR) it is important that the CEO/Founder owns pricing. Plus to keep it iterative. Pricing V1 to win your first 10 customers, then Pricing V2 for the next 10-50.',
+      author: 'Alexander Estner',
+      role: 'Founder | GTM advisor for B2B SaaS startups'
+    }
+  },
+  MLL: {
+    code: 'MLL',
+    name: 'The Tool Collectors',
+    cls: 'Class 1',
+    leakLo: 0.17, leakHi: 0.25,
+    profile: 'You have pricing tools and processes, but still rely on gut pricing. There is some pricing infrastructure in place, and someone is probably nominally responsible for it. But the tools have not translated into better pricing decisions. The trap here is the illusion of progress: having the tools feels like having a system, but the output says otherwise.',
+    moves: [
+      'Clarify pricing ownership. One person, accountable for pricing performance.',
+      'Turn tools into routines. Create a monthly pricing review using real data: discounts, churn, ARPU.',
+      'Standardize approval flows. Define who approves discounts and under what thresholds.'
+    ],
+    quote: {
+      text: 'Good pricing is harder than it looks because it requires market context, buyer psychology, conviction, and data-backed analysis. Very few companies have someone strong across all of those, so pricing often gets left half-done. If revenue is still growing, that creates a false sense that pricing is more mature than it really is.',
+      author: 'Sara McVeigh Archer',
+      role: 'CRO, ChartMogul'
+    }
+  },
+  MMM: {
+    code: 'MMM',
+    name: 'The Competent Operators',
+    cls: 'Class 2 · Most common profile',
+    leakLo: 0.10, leakHi: 0.18,
+    profile: 'Balanced and functional pricing. Typical SaaS maturity. You have established pricing processes and are not pricing blindly, but you have not developed pricing into a source of competitive differentiation. Pricing decisions are made, but rarely optimized. Revenue is captured, but routinely left on the table. It functions well enough not to be a problem, which is precisely why it never gets the attention it deserves.',
+    moves: [
+      'Conduct lightweight willingness-to-pay research (Van Westendorp or Gabor-Granger) to validate price points with real customer data.',
+      'Run at least one controlled pricing experiment per quarter - a new tier, an add-on price, or a discount structure.',
+      'Implement deal desk reporting that flags pricing deviations weekly, so leakage is caught in near-real-time, not at quarter-end.'
+    ],
+    quote: {
+      text: 'European SaaS companies often do not have a growth problem - they have a monetization problem. Chasing more demand while ignoring pricing inefficiencies is like pouring water into a bucket with a hole in it.',
+      author: 'Frida Ahrenby',
+      role: 'CMO, Rillion'
+    }
+  },
+  MHH: {
+    code: 'MHH',
+    name: 'The Revenue Optimizers',
+    cls: 'Class 4',
+    leakLo: 0.06, leakHi: 0.12,
+    profile: 'Strong pricing strategy and execution, supported by developing structure. You have done the hard strategic work. Pricing strategy is sophisticated, data-driven, and value-anchored. Execution is disciplined: sales teams follow the guidelines, discounting is controlled, deals close at or near the intended price. The gap is at the infrastructure layer - your toolkit has not kept pace with the ambition of setting and execution.',
+    moves: [
+      'Build a systematic competitive pricing intelligence loop, so market shifts are detected proactively.',
+      'Layer in dynamic or contextual pricing (geography, usage thresholds, contract length) to capture more value across buyer profiles.',
+      'Automate pricing guardrails directly into your CPQ or billing system, so out-of-policy deals are blocked before they reach the customer.'
+    ],
+    quote: {
+      text: 'At Woodpecker, pricing is owned cross-functionally but with clear accountability on the product and marketing side. We treat it as an ongoing process - combining customer feedback, usage data, and positioning - rather than a one-time decision.',
+      author: 'Margaret Sikora',
+      role: 'CEO, Woodpecker'
+    }
+  },
+  HHH: {
+    code: 'HHH',
+    name: 'The Pricing Masters',
+    cls: 'Class 5',
+    leakLo: 0.03, leakHi: 0.08,
+    profile: 'Best-in-class pricing: value-based, disciplined, and optimized. Pricing works as a system. Value-based logic is embedded across the commercial motion, enforced consistently, and continuously refined. You do not just price well - you use pricing as a strategic lever. Residual leakage reflects normal business complexity, not structural weakness.',
+    moves: [
+      'Build a pricing experimentation roadmap with quarterly A/B tests on packaging, price points, or discounting logic.',
+      'Establish a cross-functional pricing council (Product, Finance, Sales, CS) that meets quarterly to review performance and align on changes.',
+      'Establish a closed-loop feedback system where sales execution data (win/loss by price, discount impact on retention) feeds back into pricing strategy.'
+    ],
+    quote: {
+      text: 'Historically, we treated pricing with extreme caution, but we have realized it is one of our most powerful levers for growth. Today, our CEO owns the process. We make incremental adjustments once or twice a year and larger structural revamps every two to three years.',
+      author: 'Tom Niezgoda',
+      role: 'Co-founder & CMO, Surfer'
+    }
+  }
+};
+
+const DIM_DESC = {
+  toolkit: {
+    L: 'No clear ownership or dedicated team. Pricing decisions made on a whim, without structured tools or processes. Often relies on intuition or ad-hoc solutions.',
+    M: 'Pricing function is developing. Basic tools, not fully optimized. Sometimes guided by data, but no full governance or alignment across departments.',
+    H: 'Fully established pricing function with strong governance and advanced tools. Sophisticated models guide decisions. Pricing is a key cross-functional capability.'
+  },
+  setting: {
+    L: 'Reliance on basic strategies (cost-plus, competitor-based) with no deep understanding of customer value. Pricing set without clear strategy. Missed opportunities, underpricing.',
+    M: 'Moving toward structured strategy with some value-based pricing and segmentation. Beginning to test models, but the approach is inconsistent and not fully optimized.',
+    H: 'Robust, data-driven strategy based on customer value and market conditions. Regular price tests and experiments. Sophisticated models, continuously gathering insights.'
+  },
+  execution: {
+    L: 'Sales teams disregard pricing guidelines. Unauthorized discounts and pricing structure deviations. Inconsistent price realization. Vulnerable to revenue loss and margin erosion.',
+    M: 'Some controls in place, but occasional deviations. Reps generally adhere, but some deals slip through. Price realization is mostly good, not fully optimized.',
+    H: 'Full control and adherence. Sales teams strictly follow guidelines, minimal discounting or deviation. Strong enforcement. Pricing decisions fully realized across channels.'
+  }
+};
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  current: 0,
+  answers: new Array(QUESTIONS.length).fill(null)
+};
+
+/* =========================================================
+   STAGE TRANSITIONS
+   ========================================================= */
+function show(stage) {
+  document.getElementById('stage-hero').style.display = stage === 'hero' ? 'block' : 'none';
+  document.getElementById('stage-quiz').classList.toggle('active', stage === 'quiz');
+  document.getElementById('stage-result').classList.toggle('active', stage === 'result');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('start-quiz').addEventListener('click', () => {
+  state.current = 0;
+  state.answers.fill(null);
+  renderQuestion();
+  show('quiz');
+});
+
+document.getElementById('restart-btn').addEventListener('click', () => {
+  show('hero');
+});
+
+/* =========================================================
+   QUIZ RENDERING
+   ========================================================= */
+const host = document.getElementById('question-host');
+const fill = document.getElementById('progress-fill');
+const lbl  = document.getElementById('progress-label');
+const next = document.getElementById('next-btn');
+const back = document.getElementById('back-btn');
+
+function renderQuestion() {
+  const q = QUESTIONS[state.current];
+  const i = state.current;
+  fill.style.width = ((i + 1) / QUESTIONS.length * 100) + '%';
+  lbl.textContent = `Question ${i + 1} of ${QUESTIONS.length}`;
+  back.disabled = false;
+  next.disabled = state.answers[i] === null;
+  next.textContent = i === QUESTIONS.length - 1 ? 'Get my archetype →' : 'Next →';
+
+  if (q.type === 'arr') {
+    const v = state.answers[i] ?? 5;
+    host.innerHTML = `
+      <span class="question__dim">${q.short}</span>
+      <h2 class="question__text">${q.text}</h2>
+      <div class="arr-input">
+        <div class="arr-input__row">
+          <div class="arr-input__display" id="arr-display">€${v}M</div>
+          <input type="range" min="1" max="100" step="1" value="${v}" id="arr-range">
+        </div>
+        <div class="arr-input__hint">Drag to adjust. Used only to estimate your annual revenue leakage in euros.</div>
+      </div>
+    `;
+    const range = document.getElementById('arr-range');
+    const disp  = document.getElementById('arr-display');
+    state.answers[i] = parseInt(range.value, 10);
+    next.disabled = false;
+    range.addEventListener('input', e => {
+      const val = parseInt(e.target.value, 10);
+      disp.textContent = `€${val}M`;
+      state.answers[i] = val;
+    });
+    return;
+  }
+
+  host.innerHTML = `
+    <span class="question__dim">${q.short}</span>
+    <h2 class="question__text">${q.text}</h2>
+    <div class="answers" id="answers"></div>
+  `;
+  const wrap = document.getElementById('answers');
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer';
+    btn.type = 'button';
+    btn.dataset.value = idx + 1;
+    btn.innerHTML = `<span class="answer__num">${idx + 1}</span><span class="answer__text">${opt}</span>`;
+    if (state.answers[i] === idx + 1) btn.classList.add('selected');
+    btn.addEventListener('click', () => selectAnswer(idx + 1));
+    wrap.appendChild(btn);
+  });
+}
+
+let advanceTimer = null;
+function selectAnswer(value) {
+  state.answers[state.current] = value;
+  document.querySelectorAll('#answers .answer').forEach(el => {
+    el.classList.toggle('selected', parseInt(el.dataset.value, 10) === value);
+  });
+  next.disabled = false;
+  if (advanceTimer) clearTimeout(advanceTimer);
+  advanceTimer = setTimeout(() => next.click(), 320);
+}
+
+next.addEventListener('click', () => {
+  if (advanceTimer) { clearTimeout(advanceTimer); advanceTimer = null; }
+  if (state.current === QUESTIONS.length - 1) {
+    finish();
+    return;
+  }
+  state.current++;
+  renderQuestion();
+});
+
+back.addEventListener('click', () => {
+  if (advanceTimer) { clearTimeout(advanceTimer); advanceTimer = null; }
+  if (state.current === 0) { show('hero'); return; }
+  state.current--;
+  renderQuestion();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('stage-quiz').classList.contains('active')) return;
+  const q = QUESTIONS[state.current];
+  if (q.type === 'arr') return;
+  const k = parseInt(e.key, 10);
+  if (k >= 1 && k <= 5) selectAnswer(k);
+  if (e.key === 'Enter' && !next.disabled) next.click();
+  if (e.key === 'ArrowLeft' && !back.disabled) back.click();
+});
+
+/* =========================================================
+   SCORING
+   ========================================================= */
+function bucket(avg) {
+  if (avg >= 4.0) return 'H';
+  if (avg >= 2.5) return 'M';
+  return 'L';
+}
+
+function nearestArchetype(triple) {
+  if (ARCHETYPES[triple]) return triple;
+  let bestKey = 'MMM', bestDist = 99;
+  Object.keys(ARCHETYPES).forEach(k => {
+    let d = 0;
+    for (let i = 0; i < 3; i++) if (k[i] !== triple[i]) d++;
+    if (d < bestDist) { bestDist = d; bestKey = k; }
+  });
+  return bestKey;
+}
+
+function fmtEur(n) {
+  if (n >= 1000000) return '€' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return '€' + Math.round(n / 1000) + 'K';
+  return '€' + n;
+}
+
+function finish() {
+  const tk = (state.answers[0] + state.answers[1]) / 2;
+  const st = (state.answers[2] + state.answers[3]) / 2;
+  const ex = (state.answers[4] + state.answers[5]) / 2;
+  const arr = state.answers[6] * 1_000_000; // millions to euros
+
+  const triple = bucket(tk) + bucket(st) + bucket(ex);
+  const matched = nearestArchetype(triple);
+  const a = ARCHETYPES[matched];
+
+  document.getElementById('r-code').textContent = a.code;
+  document.getElementById('r-class').textContent = a.cls;
+  document.getElementById('r-name').textContent = a.name;
+  document.getElementById('r-profile').textContent = a.profile;
+
+  const lo = Math.round(arr * a.leakLo);
+  const hi = Math.round(arr * a.leakHi);
+  document.getElementById('r-leakage').textContent = `${fmtEur(lo)} - ${fmtEur(hi)}`;
+  document.getElementById('r-leakage-sub').textContent = `Based on €${state.answers[6]}M ARR and ${(a.leakLo * 100).toFixed(0)}-${(a.leakHi * 100).toFixed(0)}% MRR leakage typical of ${a.code} profiles.`;
+
+  const setDim = (prefix, dim, val) => {
+    const b = bucket(val);
+    const score = document.getElementById(`r-${prefix}-score`);
+    score.className = 'dim__score ' + b.toLowerCase();
+    score.textContent = b === 'L' ? 'Low' : b === 'M' ? 'Medium' : 'High';
+    document.getElementById(`r-${prefix}-desc`).textContent = DIM_DESC[dim][b];
+  };
+  setDim('tk', 'toolkit', tk);
+  setDim('st', 'setting', st);
+  setDim('ex', 'execution', ex);
+
+  const movesEl = document.getElementById('r-moves');
+  movesEl.innerHTML = '';
+  a.moves.forEach((m, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="moves__num">${i + 1}</span><span class="moves__text">${m}</span>`;
+    movesEl.appendChild(li);
+  });
+
+  document.getElementById('r-quote-text').textContent = '"' + a.quote.text + '"';
+  document.getElementById('r-quote-author').innerHTML = `<strong>${a.quote.author}</strong> · ${a.quote.role}`;
+
+  renderArchetypeGallery(matched);
+  show('result');
+}
+
+function renderArchetypeGallery(matched) {
+  const wrap = document.getElementById('arch-gallery');
+  wrap.innerHTML = '';
+  ['LLL', 'MLL', 'MMM', 'MHH', 'HHH'].forEach(code => {
+    const a = ARCHETYPES[code];
+    const div = document.createElement('div');
+    div.className = 'arch-card' + (code === matched ? ' you' : '');
+    div.innerHTML = `
+      <div class="arch-card__code">${code}</div>
+      <div class="arch-card__name">${a.name}</div>
+      <div class="arch-card__leak">Leakage <strong>${(a.leakLo * 100).toFixed(0)}-${(a.leakHi * 100).toFixed(0)}%</strong> · ${a.cls}${code === matched ? ' · YOU' : ''}</div>
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+/* =========================================================
+   BUSINESS EMAIL VALIDATION
+   ========================================================= */
+const FREE_DOMAINS = new Set([
+  'gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','yahoo.fr','yahoo.de',
+  'yahoo.es','yahoo.it','yahoo.pl','hotmail.com','hotmail.co.uk','hotmail.fr',
+  'hotmail.de','hotmail.es','hotmail.it','outlook.com','outlook.fr','outlook.de',
+  'live.com','live.co.uk','live.fr','msn.com','icloud.com','me.com','mac.com',
+  'aol.com','aol.co.uk','protonmail.com','proton.me','gmx.com','gmx.de','gmx.net',
+  'gmx.at','web.de','mail.com','yandex.com','yandex.ru','qq.com','163.com','126.com',
+  'wp.pl','onet.pl','interia.pl','o2.pl'
+]);
+
+function isBusinessEmail(email) {
+  const domain = email.split('@')[1]?.toLowerCase();
+  return domain && !FREE_DOMAINS.has(domain);
+}
+
+/* =========================================================
+   DOWNLOAD FORM (placeholder - swap to Formspree / HubSpot endpoint)
+   ========================================================= */
+document.getElementById('download-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('download-email').value.trim();
+  const errorEl = document.getElementById('download-error');
+  if (!email) { errorEl.textContent = 'Please enter your email.'; return; }
+  if (!isBusinessEmail(email)) { errorEl.textContent = 'Please use your work email address.'; return; }
+  errorEl.textContent = '';
+  e.target.innerHTML = `<p style="color: var(--primary); font-weight: var(--fw-bold); padding: 8px 0;">
+    Report sent to ${email}. Check your inbox in the next minute.
+  </p>`;
+});
+
+/* =========================================================
+   EMAIL GATE ON RESULT (placeholder - swap to Formspree / HubSpot endpoint)
+   ========================================================= */
+document.getElementById('email-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email-input').value.trim();
+  if (!email) return;
+  if (!isBusinessEmail(email)) {
+    document.getElementById('email-input').style.borderColor = 'var(--primary)';
+    const existing = document.getElementById('gate-error');
+    if (!existing) {
+      const err = document.createElement('p');
+      err.id = 'gate-error';
+      err.style.cssText = 'color:#ff669e;font-size:13px;margin:4px 0 0;';
+      err.textContent = 'Please use your work email address.';
+      e.target.insertBefore(err, e.target.firstChild);
+    }
+    return;
+  }
+  const form = e.target;
+  form.innerHTML = `<div style="color: var(--inverse-on-surface); padding: 14px 0;">
+    Sent. Check ${email} in the next minute.
+  </div>`;
+});
+
+/* =========================================================
+   LEAKAGE CALCULATOR
+   ========================================================= */
+const LEAKAGE_CLASSES = [
+  { label: 'Class 1', name: 'Improvisers',      lo: 0.17, hi: 0.25, highlight: false },
+  { label: 'Class 2', name: 'Tool Collectors',  lo: 0.10, hi: 0.18, highlight: true  },
+  { label: 'Class 3', name: 'Operators',        lo: 0.08, hi: 0.14, highlight: false },
+  { label: 'Class 4', name: 'Optimizers',       lo: 0.06, hi: 0.12, highlight: false },
+  { label: 'Class 5', name: 'Masters',          lo: 0.03, hi: 0.08, highlight: false },
+];
+
+function formatEur(n) {
+  if (n >= 1000000) return '€' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return '€' + Math.round(n / 1000) + 'K';
+  return '€' + Math.round(n);
+}
+
+function renderLeakage(arrM) {
+  const arr = arrM * 1000000;
+  const maxHi = LEAKAGE_CLASSES[0].hi * arr;
+  const rows = document.getElementById('leakage-rows');
+  rows.innerHTML = LEAKAGE_CLASSES.map(c => {
+    const lo = Math.round(c.lo * arr);
+    const hi = Math.round(c.hi * arr);
+    const barW = Math.round((c.hi / LEAKAGE_CLASSES[0].hi) * 100);
+    return `<div class="leakage-row${c.highlight ? ' leakage-row--highlight' : ''}">
+      <div class="leakage-row__meta">
+        <span class="leakage-row__label">${c.label} <em>${c.name}</em></span>
+        <span class="leakage-row__amount">${formatEur(lo)}–${formatEur(hi)}/yr</span>
+      </div>
+      <div class="leakage-track"><div class="leakage-fill" style="width:${barW}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('arr-picker').addEventListener('click', e => {
+  const pill = e.target.closest('.arr-pill');
+  if (!pill) return;
+  document.querySelectorAll('.arr-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  renderLeakage(parseFloat(pill.dataset.arr));
+});
+
+renderLeakage(5);
+
+/* boot */
+show('hero');
+</script>
+
+</body>
+</html>

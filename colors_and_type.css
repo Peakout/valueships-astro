@@ -1,0 +1,533 @@
+/*
+ * Valueships - colors_and_type.css
+ *
+ * Single-file drop-in for plain HTML prototypes. Combines:
+ *   - Base color tokens  (surfaces, palette, semantic families)
+ *   - Base type tokens   (font stack, weights, scale)
+ *   - Semantic utilities (h1-h4, p, small, .muted, .code, etc.)
+ *   - Motion + elevation vars
+ *
+ * Philosophy:
+ *   White editorial cards on pure white canvas, anchored by a single
+ *   high-voltage magenta. Cards float on a cool-blue inset hairline
+ *   plus a soft warm drop shadow. Headings are tight, near-black,
+ *   editorial. Reports flip to a deep aubergine night sky for cover art.
+ *
+ * Primary:   #ff005e  Valueships magenta  (CTAs, links, focus, AI marker)
+ * Tertiary:  #eaffbb  Lime accent         (sparingly; emphasis chips, callouts)
+ * Canvas:    #ffffff  Pure white
+ * Card edge: #e1e4ff  Cool-blue inset hairline (the brand signature)
+ *
+ * Variable names mirror the lammel.ai system so portable skills (button,
+ * card, callout, AI block) drop in without rewrites - only the values change.
+ */
+
+/* ---------------------------------------------------------------
+   FONT FACE
+   Lato is self-hosted from ./fonts/ in 4 weights (Regular 400,
+   Medium 500, Semibold 600, Bold 700). On the live valueships.com
+   Webflow CSS the family is registered as "Lato custom" - it is
+   plain stock Lato, just renamed by Webflow's font-uploads UI.
+   We use the canonical name "Lato" here and keep the same token
+   names (--font-display) so portable skills don't need rewrites.
+
+   Roboto stays on the Google CDN because we don't ship the .ttf
+   locally. If we ever go fully offline, drop Roboto-Light/Regular/
+   Medium/Bold .woff2 next to the Lato files and add @font-face
+   blocks for them too.
+   --------------------------------------------------------------- */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/Lato-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/Lato-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/Lato-Semibold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/Lato-Bold.ttf') format('truetype');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* ---------------------------------------------------------------
+   LIGHT THEME (default)
+   The brand is light-first. White everywhere. Cool-blue card edges.
+   --------------------------------------------------------------- */
+:root {
+  /* === SURFACES === */
+  --surface:                    #ffffff;   /* primary card / island surface */
+  --surface-dim:                #ffffff;   /* page canvas - pure white, not warm */
+  --surface-bright:             #ffffff;
+  --surface-container-lowest:   #ffffff;   /* footer rail, header */
+  --surface-container-low:      #fcfcfc;   /* off-white sections (CTAs, alt rows) */
+  --surface-container:          #f7f7f8;   /* form-section backgrounds */
+  --surface-container-high:     #ffffff;   /* popovers, modals */
+  --surface-container-highest:  #ffffff;   /* dialogs */
+  --surface-variant:            #f0f0f2;   /* hover/active for neutral chips */
+
+  /* Pink wash surfaces - used for hero gradients, ebook cards,
+     announcement bars (lighter end). Reference 2: hero, 12: ebook-gated. */
+  --surface-pink-softest:       #fff4f8;   /* primary container softest */
+  --surface-pink-soft:          #fff0f5;   /* hero gradient inner wash */
+  --surface-pink:               #ffccdf;   /* pink container, badges */
+  --surface-pink-tint:          #ff99bf;   /* gradient outer band */
+
+  /* === TEXT / FG === */
+  --on-surface:                 #080808;   /* primary text - near-black (h1 sample) */
+  --on-surface-variant:         #6d7e8c;   /* secondary text - cool gray */
+
+  --fg1: var(--on-surface);
+  --fg2: var(--on-surface-variant);
+  --fg3: #74757f;                          /* tertiary / placeholder - cool gray */
+  --fg-inverse: #ffffff;
+
+  /* === PRIMARY - Valueships Magenta ===
+     Source: 35 raw hits in webflow CSS, dominant on every CTA, badge,
+     card-hover marker, footer accent, and report cover line-art. */
+  --primary:                    #ff005e;
+  --primary-hover:              #ff337e;
+  --primary-active:             #f0004b;
+  --on-primary:                 #ffffff;
+  --primary-container:          #fff4f8;   /* lightest pink wash */
+  --on-primary-container:       #6e0028;
+
+  /* === SECONDARY - Cool Gray ===
+     Used for muted text, dividers, secondary chips. */
+  --secondary:                  #6d7e8c;
+  --on-secondary:               #ffffff;
+  --secondary-container:        #f0f0f2;
+  --on-secondary-container:     #080808;
+
+  /* === TERTIARY - Lime Accent ===
+     Brand surprise color. Use SPARINGLY: emphasis chips, "what's new"
+     badges, single-stat callouts. Never as primary CTA. */
+  --tertiary:                   #eaffbb;
+  --on-tertiary:                #1c2a08;
+  --tertiary-container:         #f5ffdc;
+  --on-tertiary-container:      #2d4410;
+
+  /* === STATUS === */
+  --error:                      #d92d20;
+  --on-error:                   #ffffff;
+  --error-container:            #fef3f2;
+  --on-error-container:         #7a271a;
+
+  --warning:                    #b54708;
+  --on-warning:                 #ffffff;
+  --warning-container:          #fffaeb;
+  --on-warning-container:       #7a2e0e;
+
+  --success:                    #027a48;
+  --on-success:                 #ffffff;
+  --success-container:          #ecfdf3;
+  --on-success-container:       #054f31;
+
+  /* === BORDERS ===
+     The cool-blue outline-variant is the brand signature - every
+     content card on Valueships uses it as a 1px border PLUS as a
+     1px inset shadow (see --elevation-1 for the recipe). */
+  --outline:                    #d9d9d9;
+  --outline-variant:            #e1e4ff;   /* cool-blue card hairline - SIGNATURE */
+  --ai-border:                  #ff005e;   /* AI-generated content left border */
+
+  /* === INVERSE === */
+  --inverse-surface:            #1a0a20;   /* report-cover aubergine */
+  --inverse-on-surface:         #ffffff;
+  --inverse-primary:            #ff669e;
+
+  --scrim:                      #000000;
+
+  /* === RADIUS ===
+     Distribution from live CSS: 10px (58 hits) cards, 6px (25) inputs,
+     8px (18) chips, 4px (11) small, pill for badges. */
+  --radius-sm:  4px;    /* small chips, code */
+  --radius-md:  6px;    /* inputs, secondary buttons */
+  --radius-lg:  8px;    /* chips, smaller cards */
+  --radius-xl:  10px;   /* MAIN CARD RADIUS - dominant brand value */
+  --radius-2xl: 16px;
+  --radius-pill: 999px;
+
+  /* === SPACING (4px base, dense at small / generous at large) === */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* === ELEVATION ===
+     elevation-1 is the SIGNATURE card recipe: cool-blue 1px inset
+     PLUS warm-neutral drop shadow. Sampled live from the ebook card:
+     `box-shadow: rgb(225, 228, 255) 0 0 1px 0 inset, rgba(0,0,0,0.06) 0 5px 25px 0`. */
+  --elevation-0: none;
+  --elevation-1: 0 0 1px 0 #e1e4ff inset, 0 5px 25px 0 rgb(0 0 0 / 0.06);
+  --elevation-2: 0 0 1px 0 #e1e4ff inset, 0 8px 30px 0 rgb(0 0 0 / 0.08);
+  --elevation-3: 0 0 1px 0 #e1e4ff inset, 0 16px 40px 0 rgb(0 0 0 / 0.10);
+
+  /* === MOTION === */
+  --motion-standard:             cubic-bezier(0.2, 0, 0, 1);
+  --motion-standard-decelerate:  cubic-bezier(0, 0, 0, 1);
+  --motion-standard-accelerate:  cubic-bezier(0.3, 0, 1, 1);
+  --motion-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  --motion-short:  150ms;
+  --motion-medium: 200ms;
+  --motion-long:   300ms;
+  --motion-xl:     500ms;
+
+  /* === TYPE - BASE ===
+     Lato for display/headings (Webflow CSS: "Lato custom" 25 hits + Lato 15).
+     Roboto for body (live computed sample: body uses Roboto 16/300/1.4).
+     Montserrat is a legacy fallback - not promoted. */
+  --font-sans:    'Roboto', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-display: 'Lato', 'Roboto', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif:   ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    900;
+
+  /* Type scale - sized for editorial reports + product UI.
+     Headlines anchored on live h1 sample (60px / 500 / -1.2px). */
+  --fs-headline-large:  60px;   /* hero h1 - reports landing, homepage */
+  --fs-headline-medium: 48px;   /* h2 - section heads */
+  --fs-headline-small:  32px;   /* h2 alt - card-section heads */
+  --fs-title-large:     24px;   /* h3 */
+  --fs-title-medium:    18px;   /* h4 / large card titles */
+  --fs-title-small:     16px;   /* small card title / tab */
+  --fs-body-large:      18px;   /* lead paragraph */
+  --fs-body-medium:     16px;   /* body default - matches live */
+  --fs-body-small:      14px;
+  --fs-label-large:     14px;
+  --fs-label-medium:    12px;
+  --fs-label-small:     11px;
+
+  /* Editorial negative letter-spacing on headings.
+     Live h1: -1.2px on 60px = -0.02em.
+     Live h2: -0.48px on 48px = -0.01em.
+     Live h3: -0.48px on 24px = -0.02em. */
+  --ls-headline-large:  -0.02em;
+  --ls-headline-medium: -0.01em;
+  --ls-headline-small:  -0.015em;
+  --ls-title-large:     -0.02em;
+  --ls-title-medium:    -0.01em;
+  --ls-title-small:     -0.005em;
+  --ls-body:            0;
+  --ls-label:           0.4px;
+
+  /* Tracking-wide kicker label, e.g. "REPORT" pill above hero h1
+     on report landings (see ai-monetization-cover.png). */
+  --ls-kicker:          0.12em;
+}
+
+/* ---------------------------------------------------------------
+   DARK THEME
+   Brand is light-first; dark exists for app-context (calculators,
+   configurators) and for report-cover analogues. Magenta gets a
+   touch of luminance to survive on aubergine. Reference: report
+   covers AIMonetizationOutlook + State of CEE + Nordics.
+   --------------------------------------------------------------- */
+.dark,
+[data-theme='dark'] {
+  --surface:                    #1a0a20;   /* aubergine - report cover base */
+  --surface-dim:                #120516;   /* deeper page canvas */
+  --surface-bright:             #2a0d2e;
+  --surface-container-lowest:   #120516;
+  --surface-container-low:      #1f0a26;
+  --surface-container:          #25102d;
+  --surface-container-high:     #2a153a;
+  --surface-container-highest:  #311a40;
+  --surface-variant:            #2f1838;
+
+  --on-surface:                 #f5eef7;
+  --on-surface-variant:         #b8a5c2;
+  --fg1: var(--on-surface);
+  --fg2: var(--on-surface-variant);
+  --fg3: #8a7a92;
+
+  /* Magenta on dark: shift toward #ff337e/#ff669e to maintain
+     contrast against aubergine. The pure #ff005e clips. */
+  --primary:                    #ff337e;
+  --primary-hover:              #ff5c95;
+  --primary-active:             #ff005e;
+  --on-primary:                 #1a0a20;
+  --primary-container:          #5a0420;
+  --on-primary-container:       #ffd1e0;
+
+  --secondary:                  #b8a5c2;
+  --on-secondary:               #1a0a20;
+  --secondary-container:        #2f1838;
+  --on-secondary-container:     #f5eef7;
+
+  --tertiary:                   #eaffbb;
+  --on-tertiary:                #1c2a08;
+  --tertiary-container:         #2d4410;
+  --on-tertiary-container:      #eaffbb;
+
+  --error:                      #f87171;
+  --error-container:            #450a0a;
+  --on-error-container:         #fecaca;
+
+  --warning:                    #fbbf24;
+  --warning-container:          #451a03;
+  --on-warning-container:       #fde68a;
+
+  --success:                    #34d399;
+  --success-container:          #064e3b;
+  --on-success-container:       #a7f3d0;
+
+  --outline:                    #4a3553;
+  --outline-variant:            #2f1838;
+  --ai-border:                  #ff337e;
+
+  --inverse-surface:            #ffffff;
+  --inverse-on-surface:         #080808;
+  --inverse-primary:            #ff005e;
+
+  /* Dark elevation drops the cool-blue inset (it disappears on
+     aubergine) and keeps a deep shadow. */
+  --elevation-1: 0 4px 12px 1px rgb(0 0 0 / 0.5), 0 1px 3px 0 rgb(0 0 0 / 0.7);
+  --elevation-2: 0 8px 24px 2px rgb(0 0 0 / 0.5), 0 2px 6px 0 rgb(0 0 0 / 0.7);
+  --elevation-3: 0 16px 32px 3px rgb(0 0 0 / 0.5), 0 4px 12px 0 rgb(0 0 0 / 0.7);
+}
+
+/* ---------------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-short: 0ms;
+    --motion-medium: 0ms;
+    --motion-long: 0ms;
+    --motion-xl: 0ms;
+  }
+}
+
+/* ===============================================================
+   BASE STYLES
+   =============================================================== */
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-dim);
+  color: var(--on-surface);
+  font-size: var(--fs-body-medium);
+  font-weight: var(--fw-light);   /* live sample: body weight 300 */
+  line-height: 1.4;               /* live sample: 1.4 */
+}
+
+/* ===============================================================
+   SEMANTIC TYPE - tag-level defaults
+   Headings switch to Lato (display) and go heavier + tighter.
+   =============================================================== */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-large);
+  line-height: 1.1;
+  font-weight: var(--fw-medium);            /* live h1: weight 500 */
+  letter-spacing: var(--ls-headline-large);
+  color: var(--fg1);
+  margin: 0 0 var(--space-4);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-medium);
+  line-height: 1.1;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-headline-medium);
+  color: var(--fg1);
+  margin: 0 0 var(--space-4);
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-title-large);
+  line-height: 1.2;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-title-large);
+  color: var(--fg1);
+  margin: 0 0 var(--space-3);
+}
+
+h4, .h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-title-medium);
+  line-height: 1.4;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-title-medium);
+  color: var(--fg1);
+  margin: 0 0 var(--space-2);
+}
+
+p, .p {
+  font-size: var(--fs-body-medium);
+  line-height: 1.55;
+  color: var(--fg1);
+  margin: 0 0 var(--space-3);
+  text-wrap: pretty;
+}
+
+small, .small {
+  font-size: var(--fs-body-small);
+  color: var(--fg2);
+  letter-spacing: var(--ls-body);
+}
+
+.muted, .fg2 { color: var(--fg2); }
+.fg3         { color: var(--fg3); }
+.accent      { color: var(--primary); }
+
+/* Kicker label - the small magenta uppercase pill that sits
+   above hero headlines on report landing pages. */
+.kicker {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-label-medium);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-kicker);
+  text-transform: uppercase;
+  color: var(--primary);
+  padding: 6px 14px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-4);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--motion-short) var(--motion-standard);
+}
+a:hover  { color: var(--primary-hover); }
+a:active { color: var(--primary-active); }
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+code, .code, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--surface-container);
+  color: var(--fg1);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--outline-variant);
+}
+
+/* ===============================================================
+   TYPE UTILITIES - explicit scale (matches Tailwind names)
+   =============================================================== */
+.text-headline-large {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-large);
+  line-height: 1.1;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-headline-large);
+}
+.text-headline-medium {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-medium);
+  line-height: 1.1;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-headline-medium);
+}
+.text-headline-small {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline-small);
+  line-height: 1.15;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-headline-small);
+}
+.text-title-large {
+  font-family: var(--font-display);
+  font-size: var(--fs-title-large);
+  line-height: 1.2;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-title-large);
+}
+.text-title-medium {
+  font-size: var(--fs-title-medium);
+  line-height: 1.4;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-title-medium);
+}
+.text-title-small {
+  font-size: var(--fs-title-small);
+  line-height: 1.43;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-title-small);
+}
+.text-body-large {
+  font-size: var(--fs-body-large);
+  line-height: 1.5;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-body);
+}
+.text-body-medium {
+  font-size: var(--fs-body-medium);
+  line-height: 1.43;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-body);
+}
+.text-body-small {
+  font-size: var(--fs-body-small);
+  line-height: 1.33;
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-body);
+}
+.text-label-large {
+  font-size: var(--fs-label-large);
+  line-height: 1.43;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+}
+.text-label-medium {
+  font-size: var(--fs-label-medium);
+  line-height: 1.33;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+}
+.text-label-small {
+  font-size: var(--fs-label-small);
+  line-height: 1.45;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+}
