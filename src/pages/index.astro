@@ -9,7 +9,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <title>State of European SaaS Pricing 2026 - Find your archetype</title>
 <meta name="description" content="A 90-second diagnostic based on the survey of ~100 European SaaS C-suite leaders. Find your pricing archetype and see how much revenue you're leaving on the table.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
+<link rel="icon" type="image/png" href={`${base}/favicon.png`}>
 <link rel="stylesheet" href={`${base}/colors_and_type.css`}>
 <style is:global>
   /* ============== layout shell ============== */
@@ -180,68 +180,65 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     margin-bottom: 32px;
   }
 
-  /* ============== download gate ============== */
-  .download-gate {
-    background: var(--surface);
-    border: 1px solid var(--outline-variant);
-    border-radius: var(--radius-xl);
-    padding: 48px 64px;
-    box-shadow: var(--elevation-1);
-    margin-bottom: 24px;
-  }
-  .download-gate__inner {
+  /* ============== krzysztof card ============== */
+  .krzysztof-card {
     display: flex;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
   }
-  .download-gate__copy { flex: 1; }
-  .download-gate__copy h2 {
-    font-family: var(--font-display);
-    font-size: var(--fs-title-large);
-    font-weight: var(--fw-medium);
-    letter-spacing: var(--ls-title-large);
-    color: var(--fg1);
-    margin-bottom: 8px;
-  }
-  .download-gate__copy p {
-    font-size: var(--fs-body-medium);
-    color: var(--fg2);
-    font-weight: var(--fw-light);
-    margin: 0;
-  }
-  .download-gate__form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .krzysztof-card__photo {
     flex-shrink: 0;
-    width: 280px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary);
   }
-  .download-gate__field { display: flex; flex-direction: column; gap: 4px; }
-  .download-gate__form input[type=email] {
-    padding: 14px 18px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--outline-variant);
-    background: var(--surface);
-    color: var(--fg1);
-    font-family: var(--font-sans);
-    font-size: var(--fs-body-medium);
-    font-weight: var(--fw-light);
+  .krzysztof-card__photo img {
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
   }
-  .download-gate__form input[type=email]:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(255, 0, 94, 0.2);
+  .krzysztof-card__body { flex: 1; }
+  .krzysztof-card__kicker {
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin: 0 0 8px;
   }
-  .download-gate__form input[type=email]::placeholder { color: var(--fg3); }
-  .download-gate__error {
-    font-size: 12px;
-    color: #c0002a;
-    min-height: 16px;
-    margin: 0;
+  .krzysztof-card__name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
   }
-  .download-gate__form .btn { width: 100%; justify-content: center; }
+  .krzysztof-card__name-row h2, h2.mb-0 { margin-bottom: 0; }
+  .krzysztof-card__li {
+    color: #0a66c2;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .krzysztof-card__li:hover { opacity: 0.75; }
+  .krzysztof-card__li svg { width: 20px; height: 20px; display: block; }
+  .krzysztof-card__role {
+    font-size: 13px;
+    color: var(--fg3);
+    margin: 0 0 12px;
+    font-weight: var(--fw-light);
+  }
+  .krzysztof-card__desc {
+    color: var(--fg2);
+    margin: 0 0 20px;
+    font-weight: var(--fw-light);
+  }
+  @media (max-width: 600px) {
+    .krzysztof-card { flex-direction: column; text-align: center; }
+    .krzysztof-card__name-row { justify-content: center; }
+  }
 
   /* ============== section card ============== */
   .card {
@@ -442,6 +439,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     height: 4px;
     background: var(--primary);
   }
+  .result__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
   .result__code {
     display: inline-block;
     font-family: var(--font-mono);
@@ -452,7 +456,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     border-radius: var(--radius-sm);
     letter-spacing: 0.12em;
     color: var(--fg1);
-    margin-bottom: 12px;
   }
   .result__class {
     display: inline-block;
@@ -462,7 +465,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     letter-spacing: var(--ls-kicker);
     color: var(--primary);
     font-weight: var(--fw-bold);
-    margin-left: 10px;
   }
   .result__name {
     font-family: var(--font-display);
@@ -610,6 +612,70 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
   .quote__author strong { color: var(--fg1); font-weight: var(--fw-medium); }
 
+  /* ============== result gate modal ============== */
+  .rg-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(10, 4, 14, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .rg-backdrop.active {
+    display: flex;
+  }
+  .rg-modal {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 36px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+  }
+  .rg-modal__lock {
+    width: 56px;
+    height: 56px;
+    background: #fde8ef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .rg-modal__lock svg { width: 26px; height: 26px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .rg-modal h2 { font-size: 22px; font-weight: var(--fw-bold); color: var(--fg1); margin: 0 0 8px; }
+  .rg-modal__sub { font-size: 15px; color: var(--fg2); margin: 0 0 24px; font-weight: var(--fw-light); }
+  .rg-modal__teaser { margin: 0 0 28px; }
+  .rg-modal__teaser-label { font-size: 12px; color: var(--fg3); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 4px; }
+  .rg-modal__code { font-size: 40px; font-weight: var(--fw-bold); color: var(--fg1); letter-spacing: 0.05em; margin: 0 0 4px; }
+  .rg-modal__name { font-size: 16px; font-weight: var(--fw-bold); color: var(--fg1); margin: 0 0 4px; }
+  .rg-modal__desc { font-size: 14px; color: var(--fg2); margin: 0; font-weight: var(--fw-light); }
+  .rg-modal__form { display: flex; flex-direction: column; gap: 10px; }
+  .rg-modal__form input {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--outline-variant);
+    background: var(--surface-variant);
+    color: var(--fg1);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-medium);
+    font-weight: var(--fw-light);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  .rg-modal__form input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(255,0,94,0.2); }
+  .rg-modal__form input::placeholder { color: var(--fg3); }
+  .rg-modal__form .btn { width: 100%; justify-content: center; }
+  .rg-modal__fine { font-size: 12px; color: var(--fg3); margin: 8px 0 0; }
+  .rg-modal__error { font-size: 12px; color: #c0002a; margin: 0; overflow: hidden; max-height: 0; transition: max-height 0.15s ease; }
+  .rg-modal__error:not(:empty) { max-height: 40px; }
+
   /* ============== gate ============== */
   /* Aubergine register - mirrors the report-cover dark theme */
   .gate {
@@ -620,6 +686,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     padding: 48px 56px;
     margin-bottom: 24px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
   .gate__plane {
     position: absolute;
@@ -651,19 +719,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     flex: 1;
     padding: 14px 18px;
     border-radius: var(--radius-md);
-    border: 1px solid #3a2540;
-    background: #25102d;
-    color: var(--inverse-on-surface);
+    border: 1px solid rgba(255,255,255,0.15);
+    background: #fff;
+    color: var(--fg1);
     font-family: var(--font-sans);
     font-size: var(--fs-body-medium);
     font-weight: var(--fw-light);
   }
-  .gate__form input::placeholder { color: #8a7a92; }
+  .gate__form input::placeholder { color: #888; }
   .gate__form input:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 2px rgba(255, 0, 94, 0.25);
   }
+  .gate__error {
+    font-size: 12px;
+    color: #ff6b8a;
+    margin: 4px 0 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.15s ease;
+  }
+  .gate__error:not(:empty) { max-height: 40px; }
 
   /* ============== archetype gallery ============== */
   .archetypes {
@@ -776,17 +853,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .dim-grid { grid-template-columns: 1fr; }
     .gate { padding: 36px 24px; }
     .gate__form { flex-direction: column; }
+    .gate__form input { width: 100%; box-sizing: border-box; }
+    .gate__form .btn { width: 100%; justify-content: center; }
     .gate__plane { display: none; }
     .question__text { font-size: 22px; }
     .result__name { font-size: 30px; }
     .leakage__num { font-size: 32px; }
     .topbar__right { display: none; }
-    .announce { font-size: 12px; padding: 8px 16px; }
     .hero__ctas { flex-direction: column; }
     .hero__ctas .btn { width: 100%; justify-content: center; }
-    .download-gate { padding: 32px 24px; }
-    .download-gate__inner { flex-direction: column; gap: 24px; }
-    .download-gate__form { width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .rg-backdrop { padding: 12px; }
+    .rg-modal { padding: 28px 20px; border-radius: 16px; }
+    .rg-modal__code { font-size: 32px; }
+    .stat__num { font-size: 24px; }
+    .hero__plane { display: none; }
   }
 
   @media (max-width: 991px) {
@@ -1084,9 +1167,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </head>
 <body>
 
-<div class="announce">
-  New report from Valueships - <a href="https://valueships.com" target="_blank" rel="noopener">read the full State of European SaaS Pricing 2026</a>
-</div>
+
 
 <header class="topbar">
   <div class="topbar__inner">
@@ -1098,7 +1179,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <div class="wrap">
 
   <div class="breadcrumb">
-    <a href="https://www.valueships.com/">valueships.com</a><span class="sep">/</span><a href="https://valueships-state-of-pricing.netlify.app">state of pricing 2026</a>
+    <a href="https://www.valueships.com/">valueships.com</a><span class="sep">/</span><a href={`${base}/`}>state of pricing 2026</a>
   </div>
 
   <!-- ============== HERO STAGE ============== -->
@@ -1256,21 +1337,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </section>
 
-    <section class="download-gate" id="download-report">
-      <div class="download-gate__inner">
-        <div class="download-gate__copy">
-          <h2>State of European SaaS Pricing 2026</h2>
-          <p>30-page research report. ~100 C-suite respondents. Free.</p>
-        </div>
-        <form class="download-gate__form" id="download-form" novalidate>
-          <div class="download-gate__field">
-            <input type="email" id="download-email" placeholder="you@company.com" autocomplete="email" />
-            <p class="download-gate__error" id="download-error" aria-live="polite"></p>
-          </div>
-          <button class="btn btn-primary" type="submit">Send me the report →</button>
-        </form>
+    <div class="gate" id="download-report">
+      <div class="gate__plane" aria-hidden="true">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,200 200,20 150,110 90,115" fill="#ff337e" opacity="0.7"/>
+          <polygon points="90,115 150,110 105,170" fill="#ff005e" opacity="0.55"/>
+          <line x1="20" y1="200" x2="150" y2="110" stroke="#ff669e" stroke-width="1.5" opacity="0.3"/>
+        </svg>
       </div>
-    </section>
+      <div class="gate__inner">
+        <h2>Get the full 30-page report</h2>
+        <p>State of European SaaS Pricing 2026. ~100 C-suite respondents. Free.</p>
+        <form class="gate__form" id="download-form" novalidate>
+          <input type="email" id="download-email" placeholder="you@company.com" autocomplete="email">
+          <button class="btn btn-primary btn-large" type="submit">Send me the report →</button>
+        </form>
+        <p class="gate__error" id="download-error" aria-live="polite"></p>
+      </div>
+    </div>
   </section>
 
   <!-- ============== QUIZ STAGE ============== -->
@@ -1294,8 +1378,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <!-- ============== RESULT STAGE ============== -->
   <section id="stage-result" class="stage result">
     <div class="result__hero">
-      <span class="result__code" id="r-code">- - -</span>
-      <span class="result__class" id="r-class">Class -</span>
+      <div class="result__meta">
+        <span class="result__code" id="r-code">- - -</span>
+        <span class="result__class" id="r-class">Class -</span>
+      </div>
       <h1 class="result__name">You are <em><span id="r-name">-</span></em></h1>
       <p class="result__profile" id="r-profile">-</p>
 
@@ -1356,10 +1442,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </div>
 
-    <div class="card" style="text-align: center;">
-      <h2>Or talk to Krzysztof</h2>
-      <p style="color: var(--fg2); max-width: 50ch; margin: 0 auto 20px;">30 minutes. No pitch. Senior Partner at Valueships, ex-McKinsey, 200+ pricing engagements. He'll tell you which of the moves above will actually move the number for your business.</p>
-      <a href="https://www.valueships.com/pricing-consultation" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book free consultation →</a>
+    <div class="card krzysztof-card">
+      <div class="krzysztof-card__photo">
+        <img src={`${base}/krzysztof.jpeg`} alt="Krzysztof Szyszkiewicz" />
+      </div>
+      <div class="krzysztof-card__body">
+        <p class="krzysztof-card__kicker">Or talk to a human</p>
+        <div class="krzysztof-card__name-row">
+          <h2 class="mb-0">Krzysztof Szyszkiewicz</h2>
+          <a href="https://www.linkedin.com/in/krzysztof-szyszkiewicz/" target="_blank" rel="noopener" class="krzysztof-card__li" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+        <p class="krzysztof-card__role">Senior Partner · Valueships · ex-McKinsey</p>
+        <a href="https://www.valueships.com/pricing-consultation" class="btn btn-primary" target="_blank" rel="noopener">Book free consultation →</a>
+      </div>
     </div>
 
     <div class="card">
@@ -1770,6 +1867,12 @@ function finish() {
 
   renderArchetypeGallery(matched);
   show('result');
+
+  // Populate modal teaser
+  document.getElementById('rg-code').textContent = a.code;
+  document.getElementById('rg-name').textContent = a.name;
+  document.getElementById('rg-desc').textContent = a.profile;
+  document.getElementById('rg-backdrop').classList.add('active');
 }
 
 function renderArchetypeGallery(matched) {
@@ -1807,24 +1910,45 @@ function isBusinessEmail(email) {
 }
 
 /* =========================================================
-   DOWNLOAD FORM (placeholder - swap to Formspree / HubSpot endpoint)
+   MAKE WEBHOOK
    ========================================================= */
-document.getElementById('download-form').addEventListener('submit', (e) => {
+const MAKE_WEBHOOK = 'https://hook.eu2.make.com/enw7u7w80f9mizxhnxak9iwognmvqjuh';
+
+async function submitToMake(email, source) {
+  try {
+    await fetch(MAKE_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source })
+    });
+  } catch (err) {
+    console.error('Make webhook error:', err);
+  }
+}
+
+/* =========================================================
+   DOWNLOAD FORM
+   ========================================================= */
+document.getElementById('download-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('download-email').value.trim();
   const errorEl = document.getElementById('download-error');
   if (!email) { errorEl.textContent = 'Please enter your email.'; return; }
   if (!isBusinessEmail(email)) { errorEl.textContent = 'Please use your work email address.'; return; }
   errorEl.textContent = '';
-  e.target.innerHTML = `<p style="color: var(--primary); font-weight: var(--fw-bold); padding: 8px 0;">
-    Report sent to ${email}. Check your inbox in the next minute.
-  </p>`;
+  await submitToMake(email, 'download-gate');
+  const PDF_URL = 'https://static.valueships.com/AIMonetizationOutlook.pdf';
+  const gateInner = e.target.closest('.gate__inner');
+  gateInner.innerHTML = `
+    <h2 style="font-size: 1.8rem; font-weight: var(--fw-bold); margin: 0 0 24px; color: var(--inverse-on-surface);">Enjoy the pricing insights!</h2>
+    <p style="margin: 0 0 8px; color: var(--inverse-on-surface); opacity: 0.78; font-size:18px;">You can download the report <a href="${PDF_URL}" target="_blank" rel="noopener" style="color:#ff8ab8; font-weight:500;">here</a>!</p>
+    <p style="margin: 0; color: var(--inverse-on-surface); opacity: 0.78; font-size:18px;">If you have any issues with the file, contact <a href="https://www.linkedin.com/in/aleksandra-romanczyk-/" target="_blank" rel="noopener" style="color:#ff8ab8; font-weight:500;">Aleksandra</a> and let her know.</p>`;
 });
 
 /* =========================================================
-   EMAIL GATE ON RESULT (placeholder - swap to Formspree / HubSpot endpoint)
+   EMAIL GATE ON RESULT
    ========================================================= */
-document.getElementById('email-form').addEventListener('submit', (e) => {
+document.getElementById('email-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('email-input').value.trim();
   if (!email) return;
@@ -1840,10 +1964,13 @@ document.getElementById('email-form').addEventListener('submit', (e) => {
     }
     return;
   }
-  const form = e.target;
-  form.innerHTML = `<div style="color: var(--inverse-on-surface); padding: 14px 0;">
-    Sent. Check ${email} in the next minute.
-  </div>`;
+  await submitToMake(email, 'result-gate');
+  const PDF_URL = 'https://static.valueships.com/AIMonetizationOutlook.pdf';
+  const gateInner = e.target.closest('.gate__inner');
+  gateInner.innerHTML = `
+    <h2 style="font-size: 1.8rem; font-weight: var(--fw-bold); margin: 0 0 24px; color: var(--inverse-on-surface);">Enjoy the pricing insights!</h2>
+    <p style="margin: 0 0 8px; color: var(--inverse-on-surface); opacity: 0.78; font-size:18px;">You can download the report <a href="${PDF_URL}" target="_blank" rel="noopener" style="color:#ff8ab8; font-weight:500;">here</a>!</p>
+    <p style="margin: 0; color: var(--inverse-on-surface); opacity: 0.78; font-size:18px;">If you have any issues with the file, contact <a href="https://www.linkedin.com/in/aleksandra-romanczyk-/" target="_blank" rel="noopener" style="color:#ff8ab8; font-weight:500;">Aleksandra</a> and let her know.</p>`;
 });
 
 /* =========================================================
@@ -1891,9 +2018,46 @@ document.getElementById('arr-picker').addEventListener('click', e => {
 
 renderLeakage(5);
 
+/* =========================================================
+   RESULT GATE MODAL
+   ========================================================= */
+document.getElementById('rg-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('rg-email').value.trim();
+  const errorEl = document.getElementById('rg-error');
+  if (!email) { errorEl.textContent = 'Please enter your email.'; return; }
+  if (!isBusinessEmail(email)) { errorEl.textContent = 'Please use your work email address.'; return; }
+  errorEl.textContent = '';
+  await submitToMake(email, 'result-modal');
+  document.getElementById('rg-backdrop').classList.remove('active');
+});
+
 /* boot */
 show('hero');
 </script>
+
+<!-- ============== RESULT GATE MODAL ============== -->
+<div class="rg-backdrop" id="rg-backdrop">
+  <div class="rg-modal">
+    <div class="rg-modal__lock">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h2>Your results are ready</h2>
+    <p class="rg-modal__sub">Enter your work email to unlock your pricing archetype, maturity scores, and priority moves.</p>
+    <div class="rg-modal__teaser">
+      <p class="rg-modal__teaser-label">Your archetype code</p>
+      <p class="rg-modal__code" id="rg-code"></p>
+      <p class="rg-modal__name" id="rg-name"></p>
+      <p class="rg-modal__desc" id="rg-desc"></p>
+    </div>
+    <form class="rg-modal__form" id="rg-form" novalidate>
+      <input type="email" id="rg-email" placeholder="you@company.com" autocomplete="email">
+      <p class="rg-modal__error" id="rg-error" aria-live="polite"></p>
+      <button class="btn btn-primary btn-large" type="submit">See my full results →</button>
+    </form>
+    <p class="rg-modal__fine">No spam. We use this to send you relevant pricing insights.</p>
+  </div>
+</div>
 
 </body>
 </html>
