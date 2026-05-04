@@ -1947,7 +1947,7 @@ document.getElementById('download-form').addEventListener('submit', async (e) =>
   if (!isBusinessEmail(email)) { errorEl.textContent = 'Please use your work email address.'; return; }
   errorEl.textContent = '';
   await submitToMake(email, 'download-gate');
-  const PDF_URL = 'https://static.valueships.com/AIMonetizationOutlook.pdf';
+  const PDF_URL = 'https://static.valueships.com/StateofEuropeanSaaSPricingValueships2026.pdf';
   const gateInner = e.target.closest('.gate__inner');
   gateInner.innerHTML = `
     <h2 style="font-size: 1.8rem; font-weight: var(--fw-bold); margin: 0 0 24px; color: var(--inverse-on-surface);">Enjoy the pricing insights!</h2>
@@ -1975,7 +1975,7 @@ document.getElementById('email-form').addEventListener('submit', async (e) => {
     return;
   }
   await submitToMake(email, 'result-gate');
-  const PDF_URL = 'https://static.valueships.com/AIMonetizationOutlook.pdf';
+  const PDF_URL = 'https://static.valueships.com/StateofEuropeanSaaSPricingValueships2026.pdf';
   const gateInner = e.target.closest('.gate__inner');
   gateInner.innerHTML = `
     <h2 style="font-size: 1.8rem; font-weight: var(--fw-bold); margin: 0 0 24px; color: var(--inverse-on-surface);">Enjoy the pricing insights!</h2>
