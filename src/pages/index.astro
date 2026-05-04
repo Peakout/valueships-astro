@@ -1926,10 +1926,10 @@ const MAKE_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/9427111/uv0g95s/';
 
 async function submitToMake(email, source) {
   try {
+    const body = new URLSearchParams({ email, source });
     await fetch(MAKE_WEBHOOK, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, source })
+      body
     });
   } catch (err) {
     console.error('Make webhook error:', err);
